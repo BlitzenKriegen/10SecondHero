@@ -1,0 +1,5 @@
+tst_rast: raster.o
+	cc68x -g raster.o
+
+raster.o: raster.c raster.h
+	cc68x -g -c raster.c

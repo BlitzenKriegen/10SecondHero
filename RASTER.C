@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <osbind.h>
-#include <"raster.h">
+#include "raster.h"
 
 #define BITMAP_HEIGHT 16
 #define XBOUNDS 640

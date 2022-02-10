@@ -8,6 +8,7 @@
 
 int main(){
     UINT16 *base = (UINT16*) Physbase();
+    UINT8 *pixel = (UINT8 *) Physbase();
     UINT16 test_blackout[16]=
     {
 	0xFFFF,
@@ -34,6 +35,7 @@ int main(){
 	drawHorizontal(base,320,200,test_blackout,height,5);
 	drawVertical(base,220,200,test_blackout,height,5);
 	clearScreen(base);
+	drawPixel(pixel,320,200);
     return 0;
 }
 
@@ -41,7 +43,6 @@ void clearScreen(UINT16 *base){
 	int x;
 	int y;
 	int height = BITMAP_HEIGHT;
-	
 	UINT16 clr[16]=
     {
 	0x0000,
@@ -93,6 +94,14 @@ void drawHorizontal(UINT16 *base,
 		plot_bitmap_16(base,x,y,bitmap,height);
 		x = x +16;
 	}
+	return;
+}
+
+void drawPixel(UINT8 *base, int x, int y){
+	if( x >= 0 && x < XBOUNDS &&
+        y >= 0 && y < YBOUNDS ) {
+        *(base + y * 80 + (x >> 3)) |= 1 << (7 - (x & 7));
+    }
 	return;
 }
 

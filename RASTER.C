@@ -38,7 +38,13 @@ int main(){
 	drawPixel(pixel,320,200);
     return 0;
 }
-
+void clearScreen(){
+	printf("\033E\033f\n");     /* blank the screen */
+	return;
+}
+/*
+this clearscreen function is relatively slow, just kept
+as a backup
 void clearScreen(UINT16 *base){
 	int x;
 	int y;
@@ -70,7 +76,7 @@ void clearScreen(UINT16 *base){
 	}
 	return;
 }
-
+*/
 void drawVertical(UINT16 *base,
 			  int x, int y,
 			  const UINT16 *bitmap,

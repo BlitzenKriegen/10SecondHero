@@ -30,6 +30,6 @@ void drawPixel(UINT8 *base, int x,
 			   int y);
 
 /* "clears" the frame buffer by setting all the pixels to white*/
-void clearScreen(UINT16 *base);
+void clearScreen();
 
 #endif

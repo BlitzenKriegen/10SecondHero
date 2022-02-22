@@ -1,0 +1,5 @@
+test: tstrast.o
+	cc68x -g tstrast.o
+
+tstrast.o: tstrast.c raster.h
+	cc68x -g -c tstrast.c

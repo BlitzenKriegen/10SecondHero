@@ -2,6 +2,7 @@
 #define MODEL_H
 #define base_len 20
 #define score_tick 50
+#define fps 35
 
 /*The following structure represents a platform 
 within 10 second hero. The platform is defined by 
@@ -11,7 +12,7 @@ drawn. Length is a whole number that represents how
 long a platform could be. For example, assuming the 
 length is 3, the platform would be drawn base_len*length 
 long, where baase_len is the base length of the platform.*/
-struct Platform
+struct platform
 {
 	unsigned int x;			
 	unsigned int y;			
@@ -25,7 +26,7 @@ xVel and yVel represent the directional movement of the
 player per game tick. Negatives represent left and down
 respectively, while positive values represent right and
 up, again respectively.*/
-struct Player
+struct player
 {
 	unsigned int x;
 	unsigned int y;
@@ -56,7 +57,8 @@ struct timeRemaining
 {
 	unsigned int x;
 	unsigned int y;
-	unsigned char wholeSeconds;
+	unsigned int wholeSeconds;
+	unsigned int ticks;
 	/*unsigned char tenthSeconds;		for future development
 	unsigned char hundrethSeconds;*/
 };
@@ -71,5 +73,15 @@ struct score
 	unsigned int y;
 	unsigned int score;
 };
+
+void movePlayer(struct player *playChar);
+
+void moveCrystal(struct crystal *inPlay, int newXCord, int newYCord);
+
+void changeScore(struct score *score, int addToScore);
+
+void changeTime(struct timeRemaining *timeLeft);
+
+/*void initializePlatform();	for future development*/
 
 #endif

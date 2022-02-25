@@ -16,7 +16,7 @@ typedef unsigned long UINT32; /* for 32x32 bitmaps */
 
 
 /* 
-Function: plotBitmap16
+Function: 	plotBitmap16
 
 Purpose:	Plots a 16xHeight bitmap on the screen at a specified location
 
@@ -40,7 +40,7 @@ void plotBitmap16(UINT16 *base,
 		    unsigned int height);
 
 /* 
-Function: drawHorizontal 
+Function: 	drawHorizontal 
 
 Purpose:	Plots a horizontal line of bitmaps at specified length and height
 
@@ -67,7 +67,7 @@ void drawHorizontal(UINT16 *base,
 			  int length);
 
 /* 
-Function: drawVertical
+Function: 	drawVertical
 
 Purpose:	Plots a vertical line of bitmaps at specified length and height
 
@@ -94,7 +94,7 @@ void drawVertical(UINT16 *base,
 			  int length);
 			  
 /* 
-Function: drawPixel 
+Function: 	drawPixel 
 
 Purpose:	Plots a pixel on the screen
 
@@ -113,7 +113,7 @@ void drawPixel(UINT8 *base, int x,
 			   int y);
 
 /* 
-Function: clearScreen
+Function: 	clearScreen
 
 Purpose:	Clears the screen of all pixels.
 

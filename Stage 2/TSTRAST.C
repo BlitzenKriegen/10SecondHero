@@ -31,6 +31,6 @@ int main(){
 	drawHorizontal(base,320,200,test_blackout,height,5);
 	drawVertical(base,220,200,test_blackout,height,5);
 	clearScreen(base);
-	drawPixel(pixel,320,200);
+	drawPixel(pixel,325,250);
     return 0;
 }

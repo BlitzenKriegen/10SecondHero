@@ -78,7 +78,7 @@ void drawPixel(UINT8 *base, int x, int y){
 	return;
 }
 
-void plot_bitmap_16(UINT16 *base,
+void plotBitmap16(UINT16 *base,
 		    int x, int y,
 		    const UINT16 *bitmap,
 		    unsigned int height){

@@ -173,7 +173,7 @@ void decreaseTime(struct TimeRemaining *timeLeft);
 void increaseTime(struct TimeRemaining *timeLeft);
 
 /* initiliziers*/
-void initPlatform(struct Platform platform, int initX, int initY, int initLength);	
+void initPlatform(struct Platform *platform, int initX, int initY, int initLength);	
 
 void initPlayer(struct Player *playChar);		
 

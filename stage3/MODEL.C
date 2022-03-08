@@ -66,11 +66,11 @@ void increaseTime(struct TimeRemaining *timeLeft)
 }
 
 /* not complete, need to add more in the future*/
-void initPlatform(struct Platform platform, int initX, int initY, int initLength)
+void initPlatform(struct Platform *platform, int initX, int initY, int initLength)
 {
-	platform.x = initX;
-	platform.x = initY;
-	platform.x = initLength;
+	platform->x = initX;
+	platform->x = initY;
+	platform->x = initLength;
 }
 	
 
@@ -106,21 +106,20 @@ void initScore(struct Score *score)
 
 void initModel(struct Model *model)
 {
-	initPlatform(model->platforms[GROUND],0,0,0);
-	initPlatform(model->platforms[1],0,0,0);
-	initPlatform(model->platforms[2],0,0,0);
-	initPlatform(model->platforms[3],0,0,0);
-	initPlatform(model->platforms[4],0,0,0);
-	initPlatform(model->platforms[5],0,0,0);
+	initPlatform(&model->platforms[GROUND],0,0,0);
+	initPlatform(&model->platforms[1],0,0,0);
+	initPlatform(&model->platforms[2],0,0,0);
+	initPlatform(&model->platforms[3],0,0,0);
+	initPlatform(&model->platforms[4],0,0,0);
+	initPlatform(&model->platforms[5],0,0,0);
 	
-	initPlayer(model->player);
+	initPlayer(&model->player);
 	
-	initCrystal(model->crystal);
+	initCrystal(&model->crystal);
 	
-	initScore(model->score);
+	initScore(&model->score);
 	
-	initTimer(model->timeLeft);
+	initTimer(&model->timeLeft);
 	
-	isTimer0 = false;
+	model->isTimer0 = false;
 }	
-

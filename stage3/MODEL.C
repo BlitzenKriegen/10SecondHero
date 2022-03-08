@@ -21,7 +21,7 @@ Details: 	The model is not responsible for handling events, whether they be
 
 /* void playerFall (struct Player *playChar)	for future development*/
 
-void playerRun(Player *playChar)
+void playerRun(struct Player *playChar)
 {
 	playChar->x += playChar->xVelocity;
 	playChar->y += playChar->yVelocity;
@@ -33,20 +33,20 @@ void playerRun(Player *playChar)
 	lines of reducing the velocity after this add*/
 }
 
-void moveCrystal(Crystal *playCrystal, int newXCord, int newYCord)
+void moveCrystal(struct Crystal *playCrystal, int newXCord, int newYCord)
 {
 	playCrystal->x = newXCord;
 	playCrystal->y = newYCord;
 }
 
-void increaseScore(Score *score)
+void increaseScore(struct Score *score)
 {
 	score->scoreAmnt += SCORE_ADD;
 	
 	/*TODO: add function to update to screen at later stage.*/
 }
 
-void decreaseTime(TimeRemaining *timeLeft)
+void decreaseTime(struct TimeRemaining *timeLeft)
 {
 	if (timeLeft->ticks < fps)
 	{
@@ -60,21 +60,21 @@ void decreaseTime(TimeRemaining *timeLeft)
 	/*This implementation sucks, will have to be revisited later.*/
 }
 
-void increaseTime(TimeRemaining *timeLeft)
+void increaseTime(struct TimeRemaining *timeLeft)
 {
-	timeLeft->wholeSeconds += TIME_SECS_ADD;
+	timeLeft->wholeSeconds += TIME_ADD;
 }
 
 /* not complete, need to add more in the future*/
-void initPlatform(Platform *platform, initX, initY, initLength)
+void initPlatform(struct Platform platform, int initX, int initY, int initLength)
 {
-	platform->x = initX;
-	platform->x = initY;
-	platform->x = initLength;
+	platform.x = initX;
+	platform.x = initY;
+	platform.x = initLength;
 }
 	
 
-void initPlayer(Player *playChar)
+void initPlayer(struct Player *playChar)
 {
 	playChar->x = PLAYER_X;
 	playChar->y = PLAYER_Y;
@@ -82,14 +82,14 @@ void initPlayer(Player *playChar)
 	playChar->yVelocity = PLAYER_Y_VEL;
 }	
 
-void initCrystal(Crystal *crystal)
+void initCrystal(struct Crystal *crystal)
 {
 	crystal->x = CRYSTAL_X;
 	crystal->y = CRYSTAL_Y;
 	crystal->playerContact = CRYSTAL_CONTACT;
 }	
 
-void initTimer(TimeRemaining *timeLeft)
+void initTimer(struct TimeRemaining *timeLeft)
 {
 	timeLeft->x = TIMER_X;
 	timeLeft->y = TIMER_Y;
@@ -97,21 +97,21 @@ void initTimer(TimeRemaining *timeLeft)
 	timeLeft->ticks = TIMER_TICKS;
 }	
 
-void initScore(Score *score)
+void initScore(struct Score *score)
 {
 	score->x = SCORE_X;
 	score->y = SCORE_Y;
 	score->scoreAmnt = SCORE_AMNT;
 }
 
-void initModel(Model *model)
+void initModel(struct Model *model)
 {
-	initPlatform(model->platforms[GROUND]);
-	initPlatform(model->platforms[1]);
-	initPlatform(model->platforms[2]);
-	initPlatform(model->platforms[3]);
-	initPlatform(model->platforms[4]);
-	initPlatform(model->platforms[5]);
+	initPlatform(model->platforms[GROUND],0,0,0);
+	initPlatform(model->platforms[1],0,0,0);
+	initPlatform(model->platforms[2],0,0,0);
+	initPlatform(model->platforms[3],0,0,0);
+	initPlatform(model->platforms[4],0,0,0);
+	initPlatform(model->platforms[5],0,0,0);
 	
 	initPlayer(model->player);
 	

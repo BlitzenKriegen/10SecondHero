@@ -17,9 +17,9 @@ Details: 	Event handlers affect the game based on the synchronous asynchronous
 #define EVENT_H
 
 /* Synchronous Events */
-
-void decreaseTime(Model *model);
-
+/*
+void decreaseTime(struct Model *model);
+*/
 
 /* Asynchronous Events*/
 /* implement these later
@@ -30,7 +30,7 @@ void jumpKeyPressed ();
 
 /* Conditional Events*/
 
-bool isTimer0 (Model *model);
+bool isTimer0 (struct Model *model);
 
 void crystalCollected ();
 

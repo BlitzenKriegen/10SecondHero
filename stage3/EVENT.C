@@ -17,12 +17,12 @@ Details: 	Even handlers affect the game based on the asynchronous or conditional
 #include "model.h"
 #include "event.h"
 
-/* Synchronous Events */
+/* Synchronous Events 
 
-void decrementTimer(Model *model)
+void decrementTimer(struct Model *model)
 {
 	decreaseTime(model->timeLeft);
-}
+}*/
 
 /* Asynchronous Events*/
 /* implement later

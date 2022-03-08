@@ -61,7 +61,7 @@ Details: 	The model is not responsible for handling events, whether they be
 typedef enum {false, true} bool;
 #define CRYSTAL_X 200
 #define CRYSTAL_Y 300
-#define CRYSTAL_CONTACT bool
+#define CRYSTAL_CONTACT 0
 
 /* initilization of timer */
 #define TIMER_X 50
@@ -162,27 +162,27 @@ struct Model
 
 /* void playerFall (struct Player *playChar)	for future development*/
 
-void playerRun(Player *playChar);
+void playerRun(struct Player *playChar);
 
-void moveCrystal(Crystal *inPlay, int newXCord, int newYCord);
+void moveCrystal(struct Crystal *inPlay, int newXCord, int newYCord);
 
-void increaseScore(Score *score);
+void increaseScore(struct Score *score);
 
-void decreaseTime(TimeRemaining *timeLeft);
+void decreaseTime(struct TimeRemaining *timeLeft);
 
-void increaseTime(TimeRemaining *timeLeft);
+void increaseTime(struct TimeRemaining *timeLeft);
 
 /* initiliziers*/
-void initPlatform(Platform *platform, initX, initY, initLength);	
+void initPlatform(struct Platform platform, int initX, int initY, int initLength);	
 
-void initPlayer(Player *playChar);		
+void initPlayer(struct Player *playChar);		
 
-void initCrystal(Crystal *crystal);	
+void initCrystal(struct Crystal *crystal);	
 
-void initScore(Score *score);	
+void initScore(struct Score *score);	
 
-void initTimer(TimeRemaining *timeLeft);	
+void initTimer(struct TimeRemaining *timeLeft);	
 
-void initModel(Model *model);	
+void initModel(struct Model *model);	
 
 #endif

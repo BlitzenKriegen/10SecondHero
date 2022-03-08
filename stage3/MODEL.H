@@ -58,9 +58,10 @@ Details: 	The model is not responsible for handling events, whether they be
 #define PLAYER_Y_VEL 3 
 
 /* initilization of crystal */
+typedef enum {false, true} bool;
 #define CRYSTAL_X 200
 #define CRYSTAL_Y 300
-#define CRYSTAL_CONTACT false
+#define CRYSTAL_CONTACT bool
 
 /* initilization of timer */
 #define TIMER_X 50
@@ -154,7 +155,7 @@ struct Model
 	struct Score score;
 	struct TimeRemaining timeLeft;
 	bool isTimer0;
-}
+};
 
 
 /* void playerJump (struct Player *playChar)	for future development*/

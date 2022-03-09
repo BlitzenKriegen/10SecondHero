@@ -32,7 +32,7 @@ void jumpKeyPressed ();
 
 bool isTimer0 (struct Model *model);
 
-void crystalCollected ();
+void crystalCollected (struct Model *model);
 
 
 /* not sure how to code this right now, will likely need multiple functions.*/

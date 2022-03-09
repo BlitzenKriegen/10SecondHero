@@ -5,12 +5,12 @@
 
 int main()
 {
-	Model test10SecondHero;
-	initModel(test10SecondHero);
+	struct Model test10SecondHero;
+	initModel(&test10SecondHero);
 
-	printf("player x:", test10SecondHero->player->x);
-	playerRun(test10SecondHero->player);
-	printf("new player x:", test10SecondHero->player->x);
+	printf("player x:", &test10SecondHero.player.x);
+	playerRun(&test10SecondHero.player);
+	printf("new player x:", &test10SecondHero.player.x);
  
     return 0;
 }

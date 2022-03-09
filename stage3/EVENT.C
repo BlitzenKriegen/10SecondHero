@@ -31,8 +31,9 @@ void moveKeyPressed ()
 	/*long key_pressed = Cnecin(); */
 	
 	
-	
+/*	
 }
+
 
 void jumpKeyPressed ()
 {
@@ -40,17 +41,17 @@ void jumpKeyPressed ()
 	
 }
 */
+
 /* Conditional Events*/
 
-bool isTimer0 (Model *model)
+bool isTimer0 (struct Model *model)
 {
-	return model->timeLeft->wholeSeconds <= 0;
+	return model->timeLeft.wholeSeconds <= 0;
 }
 
-void crystalCollected (Model *model)
+void crystalCollected (struct Model *model)
 {
-	increaseTime(model->timeLeft);
-	increaseScore(model->score);
-	moveCrystal(model->crystal, 210, 290);
+	increaseTime(&model->timeLeft);
+	increaseScore(&model->score);
+	moveCrystal(&model->crystal, 210, 290);
 }
-

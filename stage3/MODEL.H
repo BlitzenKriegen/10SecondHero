@@ -58,7 +58,6 @@ Details: 	The model is not responsible for handling events, whether they be
 #define PLAYER_Y_VEL 3 
 
 /* initilization of crystal */
-typedef enum {false, true} bool;
 #define CRYSTAL_X 200
 #define CRYSTAL_Y 300
 #define CRYSTAL_CONTACT 0
@@ -75,6 +74,23 @@ typedef enum {false, true} bool;
 #define SCORE_AMNT 0
 #define MAX_SCORE 9999
 
+typedef enum {false, true} bool;
+
+typedef unsigned char UINT8;  /* for 8x8 bitmaps */
+typedef unsigned int  UINT16; /* for 16x16 bitmaps*/
+typedef unsigned long UINT32; /* for 32x32 bitmaps */
+
+struct Hitbox{
+    UINT16 top_left_x;
+    UINT16 top_left_y;
+    UINT16 bottom_right_x;
+    UINT16 bottom_right_y;
+    UINT16 width;
+    UINT16 height;
+    /*bool collected;    maybe use this for crystal at some point*/
+};
+
+
 /*The following structure represents a platform 
 within 10 Second Hero. The platform is defined by 
 three parameters. The two parameters are the x and
@@ -88,6 +104,7 @@ struct Platform
 	unsigned int x;			
 	unsigned int y;			
 	unsigned int length;
+	
 };
 
 /*The following structure represents the player

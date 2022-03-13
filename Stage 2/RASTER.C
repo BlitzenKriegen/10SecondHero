@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <osbind.h>
 #include "raster.h"
 
 /* taken from lab 4*/

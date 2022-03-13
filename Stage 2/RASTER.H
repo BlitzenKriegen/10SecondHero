@@ -6,14 +6,9 @@ These will serve a purpose in later stages, remember how they work.
 #ifndef RASTER_H
 #define RASTER_H
 
-#define BITMAP_HEIGHT 16
-#define XBOUNDS 640
-#define YBOUNDS 400
-
-typedef unsigned char UINT8;  /* for 8x8 bitmaps */
-typedef unsigned int  UINT16; /* for 16x16 bitmaps*/
-typedef unsigned long UINT32; /* for 32x32 bitmaps */
-
+#include <stdio.h>
+#include <osbind.h>
+#include "const.h"
 
 /* 
 Function: 	plotBitmap16

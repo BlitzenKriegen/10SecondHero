@@ -16,69 +16,10 @@ Details: 	The model is not responsible for handling events, whether they be
 
 #ifndef MODEL_H
 #define MODEL_H
-#define base_len 20
-#define score_tick 50
-#define fps 35
 
-#define TIME_ADD 3
-#define SCORE_ADD 1
-
-/* ground initilization data*/
-#define GROUND 0
-#define GROUND_X 0
-#define GROUND_Y 350
-#define GROUND_LEN 40
-
-/* initilization data of other platforms*/
-/* platform 1*/
-#define P1_X 20
-#define P1_Y 280
-#define P1_LEN 2
-/* platform 2*/
-#define P2_X 40
-#define P2_Y 215
-#define P2_LEN 4
-/* platform 3*/
-#define P3_X 80
-#define P3_Y 250
-#define P3_LEN 8
-/* platform 4*/
-#define P4_X 200
-#define P4_Y 150
-#define P4_LEN 6
-/* platform 5*/
-#define P5_X 400
-#define P5_Y 200
-#define P5_LEN 6
-
-/* initilization of player */
-#define PLAYER_X 320
-#define PLAYER_Y 340
-#define PLAYER_X_VEL 3
-#define PLAYER_Y_VEL 3 
-
-/* initilization of crystal */
-#define CRYSTAL_X 200
-#define CRYSTAL_Y 300
-#define CRYSTAL_CONTACT 0
-
-/* initilization of timer */
-#define TIMER_X 50
-#define TIMER_Y 370
-#define TIMER_SECS 10
-#define TIMER_TICKS 0
-
-/* initilization of score*/
-#define SCORE_X 600
-#define SCORE_Y 370
-#define SCORE_AMNT 0
-#define MAX_SCORE 9999
-
-typedef enum {false, true} bool;
-
-typedef unsigned char UINT8;  /* for 8x8 bitmaps */
-typedef unsigned int  UINT16; /* for 16x16 bitmaps*/
-typedef unsigned long UINT32; /* for 32x32 bitmaps */
+#include <stdio.h>
+#include <osbind.h>
+#include "const.h"
 
 struct Hitbox{
     UINT16 top_left_x;
@@ -97,8 +38,8 @@ three parameters. The two parameters are the x and
 y coordinates of where the platform would begin to be
 drawn. Length is a whole number that represents how 
 long a platform could be. For example, assuming the 
-length is 3, the platform would be drawn base_len*length 
-long, where baase_len is the base length of the platform.*/
+length is 3, the platform would be drawn BASE_LEN*length 
+long, where BASE_LEN is the base length of the platform.*/
 struct Platform
 {
 	unsigned int x;			
@@ -118,8 +59,8 @@ struct Player
 {
 	unsigned int x;
 	unsigned int y;
-	unsigned int xVelocity;
-	unsigned int yVelocity;
+	int xVelocity;
+	int yVelocity;
 };
 
 /*The following strucutre represents the collectable
@@ -145,7 +86,7 @@ struct TimeRemaining
 {
 	unsigned int x;
 	unsigned int y;
-	unsigned int wholeSeconds;
+	unsigned int wholeSecs;
 	unsigned int ticks;
 	/*unsigned char tenthSeconds;		for future development
 	unsigned char hundrethSeconds;*/

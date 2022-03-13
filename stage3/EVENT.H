@@ -16,9 +16,13 @@ Details: 	Event handlers affect the game based on the synchronous asynchronous
 #ifndef EVENT_H
 #define EVENT_H
 
+#include <stdio.h>
+#include <osbind.h>
+#include "const.h"
+
 /* Synchronous Events */
 /*
-void decreaseTime(struct Model *model);
+void tickTimeDown(struct Model *model);
 */
 
 /* Asynchronous Events*/

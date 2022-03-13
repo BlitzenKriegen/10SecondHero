@@ -24,7 +24,6 @@ Details: 	The model is not responsible for handling events, whether they be
 void playerRun(struct Player *playChar)
 {
 	playChar->x += playChar->xVelocity;
-	playChar->y += playChar->yVelocity;
 	/* also dont let running incrase/decrease y values,
 	only jumping/falling affects y values */
 	
@@ -48,21 +47,30 @@ void increaseScore(struct Score *score)
 
 void decreaseTime(struct TimeRemaining *timeLeft)
 {
+	/*
 	if (timeLeft->ticks < fps)
 	{
 		timeLeft->ticks += 1;
 	}
 	else
 	{
-		timeLeft->wholeSeconds -= 1;
+		timeLeft->wholeSecs -= 1;
 		timeLeft->ticks = 0;
 	}
-	/*This implementation sucks, will have to be revisited later.*/
+	This implementation sucks, will have to be revisited later.*/
+	timeLeft->wholeSecs -= TIME_SUB;
 }
 
 void increaseTime(struct TimeRemaining *timeLeft)
 {
-	timeLeft->wholeSeconds += TIME_ADD;
+	if (timeLeft->wholeSecs <= 7)
+	{
+		timeLeft->wholeSecs += TIME_ADD;
+	}
+	else
+	{
+		timeLeft->wholeSecs = TIMER_SECS;
+	}
 }
 
 /* not complete, need to add more in the future*/
@@ -93,7 +101,7 @@ void initTimer(struct TimeRemaining *timeLeft)
 {
 	timeLeft->x = TIMER_X;
 	timeLeft->y = TIMER_Y;
-	timeLeft->wholeSeconds = TIMER_SECS;
+	timeLeft->wholeSecs = TIMER_SECS;
 	timeLeft->ticks = TIMER_TICKS;
 }	
 
@@ -106,12 +114,12 @@ void initScore(struct Score *score)
 
 void initModel(struct Model *model)
 {
-	initPlatform(&model->platforms[GROUND],0,0,0);
-	initPlatform(&model->platforms[1],0,0,0);
-	initPlatform(&model->platforms[2],0,0,0);
-	initPlatform(&model->platforms[3],0,0,0);
-	initPlatform(&model->platforms[4],0,0,0);
-	initPlatform(&model->platforms[5],0,0,0);
+	initPlatform(&model->platforms[GROUND],GROUND_X,GROUND_Y,GROUND_LEN);
+	initPlatform(&model->platforms[1],P1_X,P1_Y,P1_LEN);
+	initPlatform(&model->platforms[2],P2_X,P2_Y,P2_LEN);
+	initPlatform(&model->platforms[3],P3_X,P3_Y,P3_LEN);
+	initPlatform(&model->platforms[4],P4_X,P4_Y,P4_LEN);
+	initPlatform(&model->platforms[5],P5_X,P5_Y,P5_LEN);
 	
 	initPlayer(&model->player);
 	

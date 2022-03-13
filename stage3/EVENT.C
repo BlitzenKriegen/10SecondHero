@@ -12,14 +12,12 @@ Details: 	Even handlers affect the game based on the asynchronous or conditional
 			to move a specific direction, or the collection of a crystal.
 */
 
-#include <stdio.h>
-#include <osbind.h>
 #include "model.h"
 #include "event.h"
 
 /* Synchronous Events 
 
-void decrementTimer(struct Model *model)
+void tickTimeDown(struct Model *model)
 {
 	decreaseTime(model->timeLeft);
 }*/
@@ -46,7 +44,7 @@ void jumpKeyPressed ()
 
 bool isTimer0 (struct Model *model)
 {
-	return model->timeLeft.wholeSeconds <= 0;
+	return model->timeLeft.wholeSecs <= 0;
 }
 
 void crystalCollected (struct Model *model)

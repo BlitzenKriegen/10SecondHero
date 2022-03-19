@@ -1,7 +1,7 @@
 #include "renderer.h"
 
 int main(){
-	struct Model *tenSecondHero = NULL;
+	struct Model *tenSecondHero;
 	UINT16 *base = Physbase();
 	render(tenSecondHero,base);
 	return 0;

@@ -1,5 +1,6 @@
 #include "model.h"
 #include "const.h"
+#include "raster.h"
 #include <osbind.h>
 
 void render_player(const struct Player *Player,UINT16 *base);

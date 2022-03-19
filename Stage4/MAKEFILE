@@ -1,0 +1,16 @@
+GCC = cc68x
+
+OBJ = renderer.o model.o event.o
+
+tst_exc: $(OBJ)
+	$(GCC) -g renderer.o model.o event.o -o comp
+
+renderer.o: renderer.c renderer.h const.h
+	$(GCC) -g -c renderer.c
+
+event.o: event.c event.h
+	$(GCC) -g -c event.c
+	
+model.o: model.c model.h
+	$(GCC) -g -c model.c
+

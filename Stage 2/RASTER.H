@@ -10,6 +10,12 @@ These will serve a purpose in later stages, remember how they work.
 #include <osbind.h>
 #include "const.h"
 
+/* all black bitmap for testing purposes */
+
+
+
+
+
 /* 
 Function: 	plotBitmap16
 
@@ -121,5 +127,9 @@ Return: 	nothing
 Details:	Turns off all pixels in the frame buffer, making the whole screen white.
 */	
 void clearScreen();
+
+
+
+
 
 #endif

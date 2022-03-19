@@ -5,32 +5,27 @@
 int main(){
     UINT16 *base = (UINT16*) Physbase();
     UINT8 *pixel = (UINT8 *) Physbase();
-    UINT16 test_blackout[16]=
-    {
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF,
-	0xFFFF
-    };
 
     int height = BITMAP_HEIGHT;
     int x;
     int y;
-	drawHorizontal(base,320,200,test_blackout,height,5);
-	drawVertical(base,220,200,test_blackout,height,5);
+	/* ground + platforms 1-5*/
 	clearScreen(base);
-	drawPixel(pixel,325,250);
-    return 0;
+	drawHorizontal(base, 0, 375, BLACKOUT_BITMAP, height, 40);
+	drawHorizontal(base, 40, 300, BLACKOUT_BITMAP, height, 3);
+	drawHorizontal(base, 80, 130, BLACKOUT_BITMAP, height, 6);
+	drawHorizontal(base, 150, 250, BLACKOUT_BITMAP, height, 8);
+	drawHorizontal(base, 270, 180, BLACKOUT_BITMAP, height, 10);
+	drawHorizontal(base, 500, 225, BLACKOUT_BITMAP, height, 6);
+	
+	drawVertical(base, 10, 200, BLACKOUT_BITMAP, height, 5);
+	
+	drawPixel(pixel, 320, 250);
+	drawPixel(pixel, 335, 250);
+    /* draw game layout here*/
+	plotBitmap16(base, 340, 350, PLAYER_BITMAP, height);
+	plotBitmap16(base, 125, 110, CRYSTAL_BITMAP, height);
+	
+	
+	return 0;
 }

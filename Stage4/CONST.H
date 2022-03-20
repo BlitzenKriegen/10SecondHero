@@ -60,6 +60,7 @@ This file contains constants and type declerations utilized by other files.
 /* initilization of crystal */
 #define CRYSTAL_X 125
 #define CRYSTAL_Y 110
+#define CRYSTAL_CONTACT 0
 
 /* initilization of timer */
 #define TIMER_X 50

@@ -61,6 +61,25 @@ This file contains constants and type declerations utilized by other files.
 #define CRYSTAL_X 125
 #define CRYSTAL_Y 110
 
+#define MAX_RAND 6
+#define MIN_RAND 0
+#define SRAND_TEST_KEY 69
+#define CRYSTAL_RAND_X0 40
+#define CRYSTAL_RAND_Y0 355
+#define CRYSTAL_RAND_X1 60
+#define CRYSTAL_RAND_Y1 280
+#define CRYSTAL_RAND_X2 125
+#define CRYSTAL_RAND_Y2 110
+#define CRYSTAL_RAND_X3 175
+#define CRYSTAL_RAND_Y3 230
+#define CRYSTAL_RAND_X4 300
+#define CRYSTAL_RAND_Y4 160
+#define CRYSTAL_RAND_X5 525
+#define CRYSTAL_RAND_Y5 205
+#define CRYSTAL_RAND_X6 575
+#define CRYSTAL_RAND_Y6 355
+
+
 /* initilization of timer */
 #define TIMER_X 50
 #define TIMER_Y 370

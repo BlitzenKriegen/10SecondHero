@@ -21,26 +21,25 @@ Details: 	Event handlers affect the game based on the synchronous asynchronous
 #include "const.h"
 
 /* Synchronous Events */
-/*
+/* do this in stage 5
+
 void tickTimeDown(struct Model *model);
 */
 
 /* Asynchronous Events*/
-/* implement these later
+
+/*
 void moveKeyPressed ();
 
-void jumpKeyPressed ();
 */
 
 /* Conditional Events*/
 
-bool isTimer0 (struct Model *model);
+bool isTimer0 (struct Model model);
 
 void crystalCollected (struct Model *model);
 
 
-/* not sure how to code this right now, will likely need multiple functions.*/
-/* void collisions();*/
 
 
 

@@ -1,11 +1,9 @@
 /* 
 This file contains constants and type declerations utilized by other files.
-
 */
 
 #ifndef CONST_H
 #define CONST_H
-
 
 /* */
 #define BITMAP_HEIGHT 16

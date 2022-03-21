@@ -1,12 +1,9 @@
 /*
 Names:  	Enrik R
 			Kiril S
-
 Module:		Model 
-
 Purpose: 	The model module contains the structs and functions related to the 
 			model of the game, and the functions that directly impact the model. 
-
 Details: 	The model is not responsible for handling events, whether they be
 			synchronous, asychronous, or conditional. The model handles the
 			behaviours or actions that result from those events occuring.
@@ -269,9 +266,15 @@ bool airborneCheck (struct Model model)
 void initPlatform(struct Platform *platform, unsigned int x,
 	unsigned int y, unsigned int length)
 {
+	printf("initval x:%d\n", x);
+	printf("initval y:%d\n", y);
+	printf("initval len:%d\n", length);
 	platform->x = x;
 	platform->y = y;
 	platform->length = length;
+	printf("initval x:%d\n", platform->x);
+	printf("initval y:%d\n", platform->y);
+	printf("initval len:%d\n", platform->length);
 	platform->hitbox.topLeftX = x;
 	platform->hitbox.topLeftY = y;
 	platform->hitbox.bottomRightX = x + (SPRITE_SIZE * length);
@@ -317,8 +320,8 @@ void initScore(struct Score *score)
 
 void initModel(struct Model *model)
 {
-	initPlatform(&model->platforms[GROUND],GROUND_X,GROUND_Y,GROUND_LEN);
-	initPlatform(&model->platforms[1],P1_X,P1_Y,P1_LEN);
+	initPlatform(&(model->platforms[GROUND]),GROUND_X,GROUND_Y,GROUND_LEN);
+	/*initPlatform(&model->platforms[1],P1_X,P1_Y,P1_LEN);
 	initPlatform(&model->platforms[2],P2_X,P2_Y,P2_LEN);
 	initPlatform(&model->platforms[3],P3_X,P3_Y,P3_LEN);
 	initPlatform(&model->platforms[4],P4_X,P4_Y,P4_LEN);
@@ -332,5 +335,5 @@ void initModel(struct Model *model)
 	
 	initTimer(&model->timeLeft);
 	
-	model->isTimer0 = false;
+	model->isTimer0 = false;*/
 }	

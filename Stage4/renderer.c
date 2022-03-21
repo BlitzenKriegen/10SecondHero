@@ -40,10 +40,12 @@ void render(const struct Model *model, UINT16 *base){
 	clearScreen();
 	initModel(model);
 
+	/*
 	render_player(&model->player,base);
 	render_platform(&model->platforms,base);
 	render_crystal(&model->crystal,base);
 	render_timer(&model->timeLeft,base);
 	render_score(&model->score,base);
+	*/
 	return;
 }

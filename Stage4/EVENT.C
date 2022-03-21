@@ -7,9 +7,9 @@ Module:		Event
 Purpose: 	The event module contains the functions related to handling events
 			in the game.
 
-Details: 	Even handlers affect the game based on the asynchronous or conditional
-			events that occur, such as the pressing of keys requestion the player
-			to move a specific direction, or the collection of a crystal.
+Details: 	Event handlers affect the game based on synchronous, asynchronous, or 
+			conditional events that occur, such as the pressing of keys requesting
+			the player to move a specific direction, or the collection of a crystal.
 */
 
 #include "model.h"
@@ -17,6 +17,7 @@ Details: 	Even handlers affect the game based on the asynchronous or conditional
 
 /* Synchronous Events 
 
+  need to figure out the clock bullshit
 void tickTimeDown(struct Model *model)
 {
 	decreaseTime(model->timeLeft);
@@ -24,14 +25,13 @@ void tickTimeDown(struct Model *model)
 
 /* Asynchronous Events*/
 /* implement later
-void moveKeyPressed ()
+void movePlayer ()
 {
 	/*long key_pressed = Cnecin(); */
 	
 	
 /*	
 }
-
 
 void jumpKeyPressed ()
 {
@@ -42,9 +42,9 @@ void jumpKeyPressed ()
 
 /* Conditional Events*/
 
-bool isTimer0 (struct Model *model)
+bool isTimer0 (struct Model model)
 {
-	return model->timeLeft.wholeSecs <= 0;
+	return model.timeLeft.wholeSecs <= 0;
 }
 
 void crystalCollected (struct Model *model)

@@ -19,15 +19,15 @@ Details: 	The model is not responsible for handling events, whether they be
 
 #include <stdio.h>
 #include <osbind.h>
+#include <time.h>
+#include <stdlib.h>
 #include "const.h"
 
 struct Hitbox{
-    UINT16 top_left_x;
-    UINT16 top_left_y;
-    UINT16 bottom_right_x;
-    UINT16 bottom_right_y;
-    UINT16 width;
-    UINT16 height;
+    UINT16 topLeftX;
+    UINT16 topLeftY;
+    UINT16 bottomRightX;
+    UINT16 bottomRightY;
     /*bool collected;    maybe use this for crystal at some point*/
 };
 
@@ -45,7 +45,7 @@ struct Platform
 	unsigned int x;			
 	unsigned int y;			
 	unsigned int length;
-	
+	struct Hitbox hitbox;
 };
 
 /*The following structure represents the player
@@ -61,6 +61,7 @@ struct Player
 	unsigned int y;
 	int xVelocity;
 	int yVelocity;
+	struct Hitbox hitbox;
 };
 
 /*The following strucutre represents the collectable
@@ -74,7 +75,7 @@ struct Crystal
 {
 	unsigned int x;
 	unsigned int y;
-	bool playerContact;
+	struct Hitbox hitbox;
 };
 
 /*The following structure represents the timer within
@@ -88,7 +89,7 @@ struct TimeRemaining
 	unsigned int y;
 	unsigned int wholeSecs;
 	unsigned int ticks;
-	/*unsigned char tenthSeconds;		for future development
+	/*unsigned char tenthSeconds;		for future development maybe
 	unsigned char hundrethSeconds;*/
 };
 
@@ -109,38 +110,39 @@ struct Model
 {
 	struct Player player;
 	struct Crystal crystal;
-	struct Platform platforms[6]; /* 0 is ground platform */
+	struct Platform platforms[PLATFORM_AMNT]; /* 0 is ground platform */
 	struct Score score;
 	struct TimeRemaining timeLeft;
 	bool isTimer0;
 };
 
 
-/* void playerJump (struct Player *playChar)	for future development*/
 
-/* void playerFall (struct Player *playChar)	for future development*/
+void playerJump (struct Model *model);	
+void playerFall (struct Model *model);	
 
 void playerRun(struct Player *playChar);
-
-void moveCrystal(struct Crystal *inPlay, int newXCord, int newYCord);
-
+int calcRand();
+void crystalRandomSpawn(struct Crystal *crystal);
+void moveCrystal(struct Crystal *crystal, unsigned int x, unsigned int y);
 void increaseScore(struct Score *score);
-
 void decreaseTime(struct TimeRemaining *timeLeft);
-
 void increaseTime(struct TimeRemaining *timeLeft);
+bool collision(struct Hitbox box1, struct Hitbox box2);
+bool collideRightOfPlatform(struct Hitbox box1, struct Hitbox box2);
+bool collideLeftOfPlatform(struct Hitbox box1, struct Hitbox box2);
+bool collideBottomOfPlatform(struct Hitbox box1, struct Hitbox box2);
+bool collideTopOfPlatform(struct Hitbox box1, struct Hitbox box2);
+int platformCollisionsCheck(struct Model model);
+bool airborneCheck (struct Model model);
 
 /* initiliziers*/
-void initPlatform(struct Platform *platform, int initX, int initY, int initLength);	
-
+void initPlatform(struct Platform *platform, unsigned int x,
+	unsigned int y, unsigned int length);	
 void initPlayer(struct Player *playChar);		
-
 void initCrystal(struct Crystal *crystal);	
-
 void initScore(struct Score *score);	
-
 void initTimer(struct TimeRemaining *timeLeft);	
-
 void initModel(struct Model *model);	
 
 #endif

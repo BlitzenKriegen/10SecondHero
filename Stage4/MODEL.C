@@ -17,25 +17,144 @@ Details: 	The model is not responsible for handling events, whether they be
 #include "model.h"
 #include "event.h"
 
-/*void playerJump (struct Player *playChar) */
+int calcRand(){
+	/*srand(69);*/
+	
+	int randNum = rand() % (MAX_RAND + 1 - MIN_RAND) + MIN_RAND;
+	/*Make sure new number is different to old number*/
+	return randNum;
+}
 
-/* void playerFall (struct Player *playChar)	for future development*/
+void crystalRandomSpawn(struct Crystal *crystal)
+{
+	int randomNum = calcRand();
+	switch(randomNum)
+	{
+		case 0:
+			crystal->x = CRYSTAL_RAND_X0;
+			crystal->y = CRYSTAL_RAND_Y0;
+			crystal->hitbox.topLeftX = CRYSTAL_RAND_X0;
+			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y0;
+			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X0 + SPRITE_SIZE;
+			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y0 + SPRITE_SIZE;
+			
+			break;
+
+		case 1:
+			crystal->x = CRYSTAL_RAND_X1;
+			crystal->y = CRYSTAL_RAND_Y1;
+			crystal->hitbox.topLeftX = CRYSTAL_RAND_X1;
+			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y1;
+			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X1 + SPRITE_SIZE;
+			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y1 + SPRITE_SIZE;
+			break;
+
+		case 2:
+			crystal->x = CRYSTAL_RAND_X2;
+			crystal->y = CRYSTAL_RAND_Y2;
+			crystal->hitbox.topLeftX = CRYSTAL_RAND_X2;
+			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y2;
+			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X2 + SPRITE_SIZE;
+			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y2 + SPRITE_SIZE;
+			break;
+
+		case 3:
+			crystal->x = CRYSTAL_RAND_X3;
+			crystal->y = CRYSTAL_RAND_Y3;
+			crystal->hitbox.topLeftX = CRYSTAL_RAND_X3;
+			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y3;
+			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X3 + SPRITE_SIZE;
+			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y3 + SPRITE_SIZE;
+			break;
+
+		case 4:
+			crystal->x = CRYSTAL_RAND_X4;
+			crystal->y = CRYSTAL_RAND_Y4;
+			crystal->hitbox.topLeftX = CRYSTAL_RAND_X4;
+			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y4;
+			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X4 + SPRITE_SIZE;
+			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y4 + SPRITE_SIZE;
+			break;
+
+		case 5:
+			crystal->x = CRYSTAL_RAND_X5;
+			crystal->y = CRYSTAL_RAND_Y5;
+			crystal->hitbox.topLeftX = CRYSTAL_RAND_X5;
+			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y5;
+			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X5 + SPRITE_SIZE;
+			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y5 + SPRITE_SIZE;
+			break;
+
+		case 6:
+			crystal->x = CRYSTAL_RAND_X6;
+			crystal->y = CRYSTAL_RAND_Y6;
+			crystal->hitbox.topLeftX = CRYSTAL_RAND_X6;
+			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y6;
+			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X6 + SPRITE_SIZE;
+			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y6 + SPRITE_SIZE;
+			break;
+
+		default:
+			break;
+	}
+}
+
+void playerFall (struct Model *model)
+{
+	int platformNum = -1;
+	
+	model->player.y += model->player.yVelocity;
+	if (airborneCheck(*model))
+	{
+		/*printf("player y velocity:%d\n", model->player.yVelocity);*/
+		platformNum = platformCollisionsCheck(*model);
+		/*printf("platform collided with:%d\n", platformNum);*/
+		printf("player y pos:%u\n", model->player.y);
+		if (platformNum != -1 && collideBottomOfPlatform(model->player.hitbox,
+			model->platforms[platformNum].hitbox))
+		{ /*snap player's position below the bottom of the
+			platform so they aren't inside the platform*/
+				model->player.y =
+				model->platforms[platformNum].hitbox.bottomRightY;
+				model->player.yVelocity = 0;
+		}
+		else /* gravity pushes player down faster */
+		{
+			model->player.yVelocity++;
+		}
+	} else /* if not airborne, snap player ontop of platform
+			  so he isn't inside platform, then make velocity 0*/
+	{
+		printf("not airborne");
+		model->player.y = model->platforms[platformNum].y - SPRITE_SIZE;
+		model->player.yVelocity = 0;	
+	}
+}
+
+void playerJump (struct Model *model)
+{
+	if (!airborneCheck(*model))
+	{
+		model->player.yVelocity = PLAYER_JUMP_SPEED;
+	}
+}
+
 
 void playerRun(struct Player *playChar)
 {
 	playChar->x += playChar->xVelocity;
-	/* also dont let running incrase/decrease y values,
-	only jumping/falling affects y values */
-	
-	
-	/*Potentially add something later along the
-	lines of reducing the velocity after this add*/
+	playChar->hitbox.topLeftX = playChar->x;
+	playChar->hitbox.bottomRightX = playChar->x + SPRITE_SIZE;
 }
 
-void moveCrystal(struct Crystal *playCrystal, int newXCord, int newYCord)
+void moveCrystal(struct Crystal *crystal, unsigned int x, unsigned int y)
 {
-	playCrystal->x = newXCord;
-	playCrystal->y = newYCord;
+	crystal->x = x;
+	crystal->y = y;
+	crystal->hitbox.topLeftX = x;
+	crystal->hitbox.topLeftY = y;
+	crystal->hitbox.bottomRightX = x + SPRITE_SIZE;
+	crystal->hitbox.bottomRightY = y + SPRITE_SIZE;
 }
 
 void increaseScore(struct Score *score)
@@ -57,7 +176,8 @@ void decreaseTime(struct TimeRemaining *timeLeft)
 		timeLeft->wholeSecs -= 1;
 		timeLeft->ticks = 0;
 	}
-	This implementation sucks, will have to be revisited later.*/
+	This implementation sucks, will have to be revisited later.
+	Probably in stage 5 is when we handle this, not here.*/
 	timeLeft->wholeSecs -= TIME_SUB;
 }
 
@@ -73,14 +193,90 @@ void increaseTime(struct TimeRemaining *timeLeft)
 	}
 }
 
-/* not complete, need to add more in the future*/
-void initPlatform(struct Platform *platform, int initX, int initY, int initLength)
+bool collision(struct Hitbox box1, struct Hitbox box2)
 {
-	platform->x = initX;
-	platform->x = initY;
-	platform->x = initLength;
+	return(
+    box1.topLeftX <= box2.bottomRightX && /*box 1 collides with right of platform */
+    box1.bottomRightX >= box2.topLeftX && /*box 1 collides with left of platform */
+    box1.topLeftY <= box2.bottomRightY && /*box 1 collides with bottom of platform */
+    box1.bottomRightY >= box2.topLeftY);  /*box 1 collides with top of platform */
 }
+
+bool collideRightOfPlatform(struct Hitbox box1, struct Hitbox box2)
+{
+	return
+	(box1.topLeftX <= box2.bottomRightX &&
+	box1.topLeftX > box2.topLeftX);
+}
+
+bool collideLeftOfPlatform(struct Hitbox box1, struct Hitbox box2)
+{
+	return
+	(box1.bottomRightX >= box2.topLeftX &&
+	box1.bottomRightX < box2.bottomRightX);
+}
+
+bool collideBottomOfPlatform(struct Hitbox box1, struct Hitbox box2)
+{
+	return
+	(box1.topLeftY <= box2.bottomRightY &&
+	box1.topLeftY > box2.topLeftY);
+}
+
+bool collideTopOfPlatform(struct Hitbox box1, struct Hitbox box2)
+{
+	return
+	(box1.bottomRightY >= box2.topLeftY &&
+	box1.bottomRightY < box2.bottomRightY);
+}
+
+int platformCollisionsCheck(struct Model model) 
+{
+	int collidedPlatform = -1;
+	bool collided = false;
+	int i;
+	for (i = 0; i < PLATFORM_AMNT; i++) 
+	{
+		collided = collision(model.player.hitbox, model.platforms[i].hitbox);
+		if (collided)
+		{
+			collidedPlatform = i;
+		}
+	}
+	return collidedPlatform;
+}
+
+bool airborneCheck (struct Model model)
+{
+	int platformNum = -1;
+	int inAirOrNo = true;
+	bool collidedTop = false;
+	platformNum = platformCollisionsCheck(model);
 	
+	if (platformNum != -1)
+	{
+		if (collideTopOfPlatform(model.player.hitbox,
+		model.platforms[platformNum].hitbox))
+		{
+			inAirOrNo = false;	
+		}
+	}
+	
+	return inAirOrNo;
+}
+
+/* INITIALIZERS */
+void initPlatform(struct Platform *platform, unsigned int x,
+	unsigned int y, unsigned int length)
+{
+	platform->x = x;
+	platform->y = y;
+	platform->length = length;
+	platform->hitbox.topLeftX = x;
+	platform->hitbox.topLeftY = y;
+	platform->hitbox.bottomRightX = x + (SPRITE_SIZE * length);
+	platform->hitbox.bottomRightY = y + SPRITE_SIZE;
+}
 
 void initPlayer(struct Player *playChar)
 {
@@ -88,13 +284,20 @@ void initPlayer(struct Player *playChar)
 	playChar->y = PLAYER_Y;
 	playChar->xVelocity = PLAYER_X_VEL;
 	playChar->yVelocity = PLAYER_Y_VEL;
+	playChar->hitbox.topLeftX = playChar->x;
+	playChar->hitbox.topLeftY = playChar->y;
+	playChar->hitbox.bottomRightX = playChar->x + SPRITE_SIZE;
+	playChar->hitbox.bottomRightY = playChar->y + SPRITE_SIZE;
 }	
 
 void initCrystal(struct Crystal *crystal)
 {
 	crystal->x = CRYSTAL_X;
 	crystal->y = CRYSTAL_Y;
-	crystal->playerContact = CRYSTAL_CONTACT;
+	crystal->hitbox.topLeftX = crystal->x;
+	crystal->hitbox.topLeftY = crystal->y;
+	crystal->hitbox.bottomRightX = crystal->x + SPRITE_SIZE;
+	crystal->hitbox.bottomRightY = crystal->y + SPRITE_SIZE;
 }	
 
 void initTimer(struct TimeRemaining *timeLeft)

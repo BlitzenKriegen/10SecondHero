@@ -23,6 +23,10 @@ Details: 	Event handlers affect the game based on the synchronous asynchronous
 /* Synchronous Events */
 /* do this in stage 5
 
+player always "falling" since gravity always exists
+void makePlayerFall(struct Model *model);
+
+time always ticking down
 void tickTimeDown(struct Model *model);
 */
 

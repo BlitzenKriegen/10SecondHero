@@ -11,6 +11,6 @@ void renderScore(const struct Score *score,UINT16 *base);
 
 void renderTimer(const struct TimeRemaining *timeLeft, UINT16 *base);
 
-void renderPlatform(const struct Platform *platform[],UINT16 *base);
+void renderPlatform(const struct Platform platform[],UINT16 *base);
 
 void render(const struct Model *model, UINT16 *base);

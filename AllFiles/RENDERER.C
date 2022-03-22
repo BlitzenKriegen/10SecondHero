@@ -18,15 +18,12 @@ void renderCrystal(const struct Crystal *crystal,UINT16 *base){
 	return;
 }
 
-void renderPlatform(const struct Platform *platform[],UINT16 *base){
-	int i;
-	int j;
-	int len;
+void renderPlatform(const struct Platform platform[],UINT16 *base){
+	int i = 0;
+	printf("Val: %d\n",platform[i].x);
 	for (i = 0;i < 6; i++) {
-		for(j = 0; j < platform[i]->length;j++){
-			plotBitmap16(base,platform[i]->x + (j*16),
-			platform[i]->y + (j*16),BLACKOUT_BITMAP,MAX_HEIGHT);
-		}
+		drawHorizontal(base,platform[i].x,
+		platform[i].y, BLACKOUT_BITMAP, MAX_HEIGHT, platform[i].length);	
 	}
 	return;
 }
@@ -44,14 +41,12 @@ void renderScore(const struct Score *score,UINT16 *base){
 void render(const struct Model *model, UINT16 *base){
 	clearScreen();
 	initModel(model);
-	render_platform(&(model.platforms),base);
-
-	/*
-	render_player(&model->player,base);
+	renderPlatform(model->platforms,base);
 	
-	render_crystal(&model->crystal,base);
-	render_timer(&model->timeLeft,base);
-	render_score(&model->score,base);
-	*/
+	renderPlayer(&model->player,base);	
+	renderCrystal(&model->crystal,base);
+	renderTimer(&model->timeLeft,base);
+	renderScore(&model->score,base);
+	
 	return;
 }

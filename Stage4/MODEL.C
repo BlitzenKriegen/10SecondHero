@@ -137,7 +137,7 @@ void playerFall (struct Model *model)
 		model->player.hitbox.bottomRightY =
 		model->platforms[platformNum].y;
 		model->player.yVelocity = 0;	
-		model->player.hitbox.bottomRightY);
+		model->player.hitbox.bottomRightY;
 	}
 }
 

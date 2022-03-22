@@ -1,9 +1,12 @@
 /*
 Names:  	Enrik R
 			Kiril S
+
 Module:		Model 
+
 Purpose: 	The model module contains the structs and functions related to the 
 			model of the game, and the functions that directly impact the model. 
+
 Details: 	The model is not responsible for handling events, whether they be
 			synchronous, asychronous, or conditional. The model handles the
 			behaviours or actions that result from those events occuring.

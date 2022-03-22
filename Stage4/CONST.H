@@ -1,9 +1,11 @@
 /* 
 This file contains constants and type declerations utilized by other files.
+
 */
 
 #ifndef CONST_H
 #define CONST_H
+
 
 /* */
 #define BITMAP_HEIGHT 16
@@ -53,7 +55,8 @@ This file contains constants and type declerations utilized by other files.
 #define PLAYER_Y 350
 #define PLAYER_X_VEL 0
 #define PLAYER_Y_VEL 0 
-#define PLAYER_JUMP_SPEED -5
+#define PLAYER_JUMP_SPEED -11
+#define PLAYER_MAX_FALL_SPEED 5
 
 /* initilization of crystal */
 #define CRYSTAL_X 125

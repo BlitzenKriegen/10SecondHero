@@ -36,7 +36,7 @@ Details: 	Using the address of the frame buffer and an offset calculated from
          
 */
 void plotBitmap16(UINT16 *base,
-		    int x, int y,
+		    unsigned int x, unsigned int y,
 		    const UINT16 *bitmap,
 		    unsigned int height);
 

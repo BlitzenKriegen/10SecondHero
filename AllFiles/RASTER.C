@@ -77,7 +77,7 @@ void drawPixel(UINT8 *base, int x, int y){
 }
 
 void plotBitmap16(UINT16 *base,
-		    int x, int y,
+		    unsigned int x, unsigned int y,
 		    const UINT16 *bitmap,
 		    unsigned int height){
     int i;

@@ -104,20 +104,14 @@ void playerFall (struct Model *model)
 	model->player.y += model->player.yVelocity;
 	model->player.hitbox.topLeftY += model->player.yVelocity;
 	model->player.hitbox.bottomRightY += model->player.yVelocity;
-	printf("player y velocity:%d\n", model->player.yVelocity);
-	printf("player y pos:%u\n", model->player.y);
-	printf("player topLeftY pos:%u\n", model->player.hitbox.topLeftY);
-	printf("player bottomRightY pos:%u\n", model->player.hitbox.bottomRightY);
 	if (airborneCheck(*model))
 	{
-		printf("player is airborne\n");
 		platformNum = platformCollisionsCheck(*model);
 		
 		if (platformNum != -1 && collideBottomOfPlatform(model->player.hitbox,
 			model->platforms[platformNum].hitbox))
 		{ /*snap player's position below the bottom of the
 			platform so they aren't inside the platform*/
-			printf("hit bottom of platform:%d\n", platformNum);
 			model->player.y =
 			model->platforms[platformNum].hitbox.bottomRightY + 1;
 			model->player.hitbox.topLeftY =
@@ -128,7 +122,6 @@ void playerFall (struct Model *model)
 		}
 		else /* gravity pushes player down faster, up to 5 pixels/s */
 		{
-			printf("player didn't collide, gravity at play\n");
 			if (model->player.yVelocity < PLAYER_MAX_FALL_SPEED)
 			{
 				model->player.yVelocity++;
@@ -138,16 +131,12 @@ void playerFall (struct Model *model)
 			  so he isn't inside platform, then make velocity 0*/
 	{
 		platformNum = platformCollisionsCheck(*model);
-		printf("platformNum%d\n", platformNum);
-		printf("not airborne\n");
+		
 		model->player.y = model->platforms[platformNum].y - SPRITE_SIZE;
-		
 		model->player.hitbox.topLeftY = model->player.y;
-		
 		model->player.hitbox.bottomRightY =
 		model->platforms[platformNum].y;
 		model->player.yVelocity = 0;	
-		printf("player y pos hit top of platform:%u\n",
 		model->player.hitbox.bottomRightY);
 	}
 }

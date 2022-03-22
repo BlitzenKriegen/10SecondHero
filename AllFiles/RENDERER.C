@@ -2,9 +2,9 @@
 #define MAX_HEIGHT 16
 
 int main(){
-	struct Model *tenSecondHero;
+	struct Model tenSecondHero;
 	UINT16 *base = Physbase();
-	render(tenSecondHero,base);
+	render(&tenSecondHero,base);
 	return 0;
 }
 
@@ -20,8 +20,13 @@ void renderCrystal(const struct Crystal *crystal,UINT16 *base){
 
 void renderPlatform(const struct Platform *platform[],UINT16 *base){
 	int i;
+	int j;
+	int len;
 	for (i = 0;i < 6; i++) {
-		plotBitmap16(base,platform[i]->x,platform[i]->y,BLACKOUT_BITMAP,MAX_HEIGHT);
+		for(j = 0; j < platform[i]->length;j++){
+			plotBitmap16(base,platform[i]->x + (j*16),
+			platform[i]->y + (j*16),BLACKOUT_BITMAP,MAX_HEIGHT);
+		}
 	}
 	return;
 }
@@ -39,10 +44,11 @@ void renderScore(const struct Score *score,UINT16 *base){
 void render(const struct Model *model, UINT16 *base){
 	clearScreen();
 	initModel(model);
+	render_platform(&(model.platforms),base);
 
 	/*
 	render_player(&model->player,base);
-	render_platform(&model->platforms,base);
+	
 	render_crystal(&model->crystal,base);
 	render_timer(&model->timeLeft,base);
 	render_score(&model->score,base);

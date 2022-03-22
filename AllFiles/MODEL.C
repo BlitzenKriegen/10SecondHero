@@ -283,6 +283,7 @@ void initPlatform(struct Platform *platform, unsigned int x,
 	platform->x = x;
 	platform->y = y;
 	platform->length = length;
+
 	platform->hitbox.topLeftX = x;
 	platform->hitbox.topLeftY = y;
 	platform->hitbox.bottomRightX = x + (SPRITE_SIZE * length);
@@ -333,6 +334,7 @@ void initModel(struct Model *model)
 	initPlatform(&(model->platforms[2]),P2_X,P2_Y,P2_LEN);
 	initPlatform(&(model->platforms[3]),P3_X,P3_Y,P3_LEN);
 	initPlatform(&(model->platforms[4]),P4_X,P4_Y,P4_LEN);
+	
 	initPlatform(&(model->platforms[5]),P5_X,P5_Y,P5_LEN);
 	
 	initPlayer(&model->player);

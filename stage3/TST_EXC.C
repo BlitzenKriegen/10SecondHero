@@ -52,7 +52,7 @@ int main()
 	printf("crystal y before rand spawn:%u\n", test10SecondHero.crystal.y);
 	*/
 	
-	/*
+	
 	printf("platform top left y%u\n", test10SecondHero.platforms[0].hitbox.topLeftY);
 	printf("platform bottom right y%u\n", test10SecondHero.platforms[0].hitbox.bottomRightY);
 	printf("platform top left x%u\n", test10SecondHero.platforms[0].hitbox.topLeftX);
@@ -142,6 +142,6 @@ int main()
 	printf("player hit bottom of platform?%i\n", botCheck);
 	printf("the platform collided with:%i\n", platformCollisionOrNo);
 	printf("is player airborne? :%i\n", airborne);
-    return 0; */
+    return 0; 
 }
 

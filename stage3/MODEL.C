@@ -140,7 +140,7 @@ void playerFall (struct Model *model)
 		platformNum = platformCollisionsCheck(*model);
 		printf("platformNum%d\n", platformNum);
 		printf("not airborne\n");
-		model->player.y = model->platforms[platformNum].y - SPRITE_SIZE-1;
+		model->player.y = model->platforms[platformNum].y - SPRITE_SIZE;
 		
 		model->player.hitbox.topLeftY = model->player.y;
 		
@@ -339,12 +339,12 @@ void initScore(struct Score *score)
 
 void initModel(struct Model *model)
 {
-	initPlatform(&model->platforms[GROUND],GROUND_X,GROUND_Y,GROUND_LEN);
-	initPlatform(&model->platforms[1],P1_X,P1_Y,P1_LEN);
-	initPlatform(&model->platforms[2],P2_X,P2_Y,P2_LEN);
-	initPlatform(&model->platforms[3],P3_X,P3_Y,P3_LEN);
-	initPlatform(&model->platforms[4],P4_X,P4_Y,P4_LEN);
-	initPlatform(&model->platforms[5],P5_X,P5_Y,P5_LEN);
+	initPlatform(&(model->platforms[GROUND]),GROUND_X,GROUND_Y,GROUND_LEN);
+	initPlatform(&(model->platforms[1]),P1_X,P1_Y,P1_LEN);
+	initPlatform(&(model->platforms[2]),P2_X,P2_Y,P2_LEN);
+	initPlatform(&(model->platforms[3]),P3_X,P3_Y,P3_LEN);
+	initPlatform(&(model->platforms[4]),P4_X,P4_Y,P4_LEN);
+	initPlatform(&(model->platforms[5]),P5_X,P5_Y,P5_LEN);
 	
 	initPlayer(&model->player);
 	

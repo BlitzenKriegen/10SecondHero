@@ -16,13 +16,13 @@ Details: 	A model structure is created and initialized to set values from const.
 #define POS5 64
 #define POS6 80
 
-/*test driver to create the gamestate*/
+/*test driver to create the gamestate
 int main(){
 	struct Model tenSecondHero;
 	UINT16 *base = Physbase();
 	render(&tenSecondHero,base);
 	return 0;
-}
+}*/
 
 /*
 Subroutine: renderPlayer

@@ -82,14 +82,14 @@ This file contains constants and type declerations utilized by other files.
 
 
 /* initilization of timer */
-#define TIMER_X 50
-#define TIMER_Y 370
+#define TIMER_X 10
+#define TIMER_Y 20
 #define TIMER_SECS 10
 #define TIMER_TICKS 0
 
 /* initilization of score*/
-#define SCORE_X 600
-#define SCORE_Y 370
+#define SCORE_X 450
+#define SCORE_Y 20
 #define SCORE_AMNT 0
 #define MAX_SCORE 9999
 
@@ -106,5 +106,15 @@ extern UINT16 BLACKOUT_BITMAP[BITMAP_HEIGHT];
 extern UINT16 CLEAR_BITMAP[BITMAP_HEIGHT];
 extern UINT16 PLAYER_BITMAP[BITMAP_HEIGHT];
 extern UINT16 CRYSTAL_BITMAP[BITMAP_HEIGHT];
+
+extern UINT16 LETTER_S[BITMAP_HEIGHT];
+extern UINT16 LETTER_C[BITMAP_HEIGHT];
+extern UINT16 LETTER_O[BITMAP_HEIGHT];
+extern UINT16 LETTER_R[BITMAP_HEIGHT];
+extern UINT16 LETTER_E[BITMAP_HEIGHT];
+
+extern UINT16 LETTER_T[BITMAP_HEIGHT];
+extern UINT16 LETTER_I[BITMAP_HEIGHT];
+extern UINT16 LETTER_M[BITMAP_HEIGHT];
 
 #endif

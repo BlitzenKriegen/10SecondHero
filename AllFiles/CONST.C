@@ -1,12 +1,16 @@
+/*
+Names:  	Enrik R
+			Kiril S
+
+Module:		Const
+
+Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
+*/
 #include "const.h"
 
 
 /* 
-
-all black bitmap for testing purposes and for making platforms
-
-
-
+	All black bitmap for testing purposes and for making platforms.
 */
 
 UINT16 BLACKOUT_BITMAP[BITMAP_HEIGHT] =
@@ -29,6 +33,9 @@ UINT16 BLACKOUT_BITMAP[BITMAP_HEIGHT] =
 	0xFFFF
 };
 
+/* 
+	All white bitmap for testing purposes and for clearing some parts of the screen.
+*/
 UINT16 CLEAR_BITMAP[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -49,6 +56,9 @@ UINT16 CLEAR_BITMAP[BITMAP_HEIGHT] =
 	0x0000
 };
 
+/* 
+	Bitmap of the player character.
+*/
 UINT16 PLAYER_BITMAP[BITMAP_HEIGHT] =
 {
 	0x07E0,
@@ -69,6 +79,9 @@ UINT16 PLAYER_BITMAP[BITMAP_HEIGHT] =
 	0x0660
 };
 
+/* 
+	Bitmap of the character.
+*/
 UINT16 CRYSTAL_BITMAP[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -89,6 +102,9 @@ UINT16 CRYSTAL_BITMAP[BITMAP_HEIGHT] =
 	0x0000
 };
 
+/* 
+	Bitmap for the letter S.
+*/
 UINT16 LETTER_S[BITMAP_HEIGHT] =
 {
 	0x3FFC,
@@ -109,6 +125,9 @@ UINT16 LETTER_S[BITMAP_HEIGHT] =
 	0x3FFC
 };
 
+/* 
+	Bitmap for the letter C.
+*/
 UINT16 LETTER_C[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -128,7 +147,9 @@ UINT16 LETTER_C[BITMAP_HEIGHT] =
 	0x1FF8,
 	0x0000
 };
-
+/* 
+	Bitmap for the letter O.
+*/
 UINT16 LETTER_O[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -149,6 +170,9 @@ UINT16 LETTER_O[BITMAP_HEIGHT] =
 	0x0000
 };
 
+/* 
+	Bitmap for the letter R.
+*/
 UINT16 LETTER_R[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -169,6 +193,9 @@ UINT16 LETTER_R[BITMAP_HEIGHT] =
 	0x0000
 };
 
+/* 
+	Bitmap for the letter E.
+*/
 UINT16 LETTER_E[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -189,6 +216,9 @@ UINT16 LETTER_E[BITMAP_HEIGHT] =
 	0x0000
 };
 
+/* 
+	Bitmap for the letter T.
+*/
 UINT16 LETTER_T[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -209,6 +239,9 @@ UINT16 LETTER_T[BITMAP_HEIGHT] =
 	0x0000
 };
 
+/* 
+	Bitmap for the letter I.
+*/
 UINT16 LETTER_I[BITMAP_HEIGHT] =
 {
 	0x0000,
@@ -229,6 +262,9 @@ UINT16 LETTER_I[BITMAP_HEIGHT] =
 	0x0000
 };
 
+/* 
+	Bitmap for the letter M.
+*/
 UINT16 LETTER_M[BITMAP_HEIGHT] =
 {
 	0x0000,

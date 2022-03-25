@@ -15,31 +15,35 @@ Details: 	Event handlers affect the game based on synchronous, asynchronous, or
 #include "model.h"
 #include "event.h"
 
-/* Synchronous Events 
+/* Synchronous Events */
 
-  need to figure out the clock bullshit
+void makePlayerFall(struct Model *model)
+{
+	playerFall(&model->player);
+}
+
 void tickTimeDown(struct Model *model)
 {
-	decreaseTime(model->timeLeft);
-}*/
+	decreaseTime(&model->timeLeft);
+}
 
 /* Asynchronous Events*/
-/* implement later
-void movePlayer ()
-{
-	/*long key_pressed = Cnecin(); */
-	
-	
-/*	
-}
 
-void jumpKeyPressed ()
+void movePlayer (struct Model *model, char key)
 {
-	
+	if (key == A_ASCII)
+	{
+		playerRun(model, left);
+	} else if (key == D_ASCII)
+	{
+		playerRun(model, right);
+	} else if (key == SPACE_ASCII)
+	{
+		playerJump(model);
+	}
+		
 	
 }
-*/
-
 /* Conditional Events*/
 
 bool isTimer0 (struct Model model)
@@ -51,5 +55,5 @@ void crystalCollected (struct Model *model)
 {
 	increaseTime(&model->timeLeft);
 	increaseScore(&model->score);
-	moveCrystal(&model->crystal, 210, 290);
+	crystalRandomSpawn(&model->crystal);
 }

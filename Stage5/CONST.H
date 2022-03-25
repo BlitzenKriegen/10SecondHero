@@ -1,6 +1,10 @@
-/* 
-This file contains constants and type declerations utilized by other files.
+/*
+Names:  	Enrik R
+			Kiril S
 
+Module:		Const
+
+Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 */
 
 #ifndef CONST_H
@@ -12,6 +16,8 @@ This file contains constants and type declerations utilized by other files.
 #define SPRITE_SIZE 16
 #define XBOUNDS 640
 #define YBOUNDS 400
+
+#define IN_BOUNDS(x, y) (x >= 0 && x < XBOUNDS && y >= 0 && y < YBOUNDS)
 
 #define SCORE_TICK 50
 #define FPS 35
@@ -57,6 +63,7 @@ This file contains constants and type declerations utilized by other files.
 #define PLAYER_Y_VEL 0 
 #define PLAYER_JUMP_SPEED -11
 #define PLAYER_MAX_FALL_SPEED 5
+#define PLAYER_RUN_SPEED 3
 
 /* initilization of crystal */
 #define CRYSTAL_X 125
@@ -93,14 +100,25 @@ This file contains constants and type declerations utilized by other files.
 #define SCORE_AMNT 0
 #define MAX_SCORE 9999
 
+/* asciis, gonna need to replace soon*/
+#define ESC_ASCII 27
+#define A_ASCII 97
+#define D_ASCII 100
+#define SPACE_ASCII 32
+
+
 typedef int bool;
 #define true 1
 #define false 0
 
-
 typedef unsigned char UINT8;  /* for 8x8 bitmaps */
 typedef unsigned int  UINT16; /* for 16x16 bitmaps*/
 typedef unsigned long UINT32; /* for 32x32 bitmaps */
+
+typedef enum
+{
+	left, right
+} Direction;
 
 extern UINT16 BLACKOUT_BITMAP[BITMAP_HEIGHT];
 extern UINT16 CLEAR_BITMAP[BITMAP_HEIGHT];

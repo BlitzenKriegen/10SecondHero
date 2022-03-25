@@ -7,10 +7,8 @@ Module:		Model
 Purpose: 	The model module contains the structs and functions related to the 
 			model of the game, and the functions that directly impact the model. 
 
-Details: 	The model is not responsible for handling events, whether they be
-			synchronous, asychronous, or conditional. The model handles the
-			behaviours or actions that result from those events occuring.
-			Ex: Space bar is pressed (event) = player jumps (action)
+Details: 	The model handles the behaviours or actions that results from events
+			occuring in the game. Ex: Space bar is pressed (event) = player jumps (action)
 */
 #include <stdio.h>
 #include <osbind.h>
@@ -19,7 +17,6 @@ Details: 	The model is not responsible for handling events, whether they be
 
 int calcRand(){
 	srand((unsigned)time(NULL));
-	
 	return rand() % (MAX_RAND + 1 - MIN_RAND) + MIN_RAND;
 }
 
@@ -35,9 +32,7 @@ void crystalRandomSpawn(struct Crystal *crystal)
 			crystal->hitbox.topLeftY = CRYSTAL_RAND_Y0;
 			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X0 + SPRITE_SIZE;
 			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y0 + SPRITE_SIZE;
-			
 			break;
-
 		case 1:
 			crystal->x = CRYSTAL_RAND_X1;
 			crystal->y = CRYSTAL_RAND_Y1;
@@ -46,7 +41,6 @@ void crystalRandomSpawn(struct Crystal *crystal)
 			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X1 + SPRITE_SIZE;
 			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y1 + SPRITE_SIZE;
 			break;
-
 		case 2:
 			crystal->x = CRYSTAL_RAND_X2;
 			crystal->y = CRYSTAL_RAND_Y2;
@@ -55,7 +49,6 @@ void crystalRandomSpawn(struct Crystal *crystal)
 			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X2 + SPRITE_SIZE;
 			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y2 + SPRITE_SIZE;
 			break;
-
 		case 3:
 			crystal->x = CRYSTAL_RAND_X3;
 			crystal->y = CRYSTAL_RAND_Y3;
@@ -64,7 +57,6 @@ void crystalRandomSpawn(struct Crystal *crystal)
 			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X3 + SPRITE_SIZE;
 			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y3 + SPRITE_SIZE;
 			break;
-
 		case 4:
 			crystal->x = CRYSTAL_RAND_X4;
 			crystal->y = CRYSTAL_RAND_Y4;
@@ -73,7 +65,6 @@ void crystalRandomSpawn(struct Crystal *crystal)
 			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X4 + SPRITE_SIZE;
 			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y4 + SPRITE_SIZE;
 			break;
-
 		case 5:
 			crystal->x = CRYSTAL_RAND_X5;
 			crystal->y = CRYSTAL_RAND_Y5;
@@ -82,7 +73,6 @@ void crystalRandomSpawn(struct Crystal *crystal)
 			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X5 + SPRITE_SIZE;
 			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y5 + SPRITE_SIZE;
 			break;
-
 		case 6:
 			crystal->x = CRYSTAL_RAND_X6;
 			crystal->y = CRYSTAL_RAND_Y6;
@@ -91,7 +81,6 @@ void crystalRandomSpawn(struct Crystal *crystal)
 			crystal->hitbox.bottomRightX = CRYSTAL_RAND_X6 + SPRITE_SIZE;
 			crystal->hitbox.bottomRightY = CRYSTAL_RAND_Y6 + SPRITE_SIZE;
 			break;
-
 		default:
 			break;
 	}
@@ -100,7 +89,6 @@ void crystalRandomSpawn(struct Crystal *crystal)
 void playerFall (struct Model *model)
 {
 	int platformNum = -1;
-	
 	model->player.y += model->player.yVelocity;
 	model->player.hitbox.topLeftY += model->player.yVelocity;
 	model->player.hitbox.bottomRightY += model->player.yVelocity;
@@ -131,7 +119,6 @@ void playerFall (struct Model *model)
 			  so he isn't inside platform, then make velocity 0*/
 	{
 		platformNum = platformCollisionsCheck(*model);
-		
 		model->player.y = model->platforms[platformNum].y - SPRITE_SIZE;
 		model->player.hitbox.topLeftY = model->player.y;
 		model->player.hitbox.bottomRightY =
@@ -145,50 +132,45 @@ void playerJump (struct Model *model)
 {
 	if (!airborneCheck(*model))
 	{
-		printf("player jumped\n");
 		model->player.yVelocity = PLAYER_JUMP_SPEED;
 	}
 }
 
 
-void playerRun(struct Player *playChar)
+void playerRun(struct Model *model, Direction direction)
 {
-	playChar->x += playChar->xVelocity;
-	playChar->hitbox.topLeftX = playChar->x;
-	playChar->hitbox.bottomRightX = playChar->x + SPRITE_SIZE;
-}
-
-void moveCrystal(struct Crystal *crystal, unsigned int x, unsigned int y)
-{
-	crystal->x = x;
-	crystal->y = y;
-	crystal->hitbox.topLeftX = x;
-	crystal->hitbox.topLeftY = y;
-	crystal->hitbox.bottomRightX = x + SPRITE_SIZE;
-	crystal->hitbox.bottomRightY = y + SPRITE_SIZE;
+	int platformNum = -1;
+	platformNum = platformCollisionsCheck(*model);
+	switch (direction)
+	{
+		case left:
+			if (IN_BOUNDS(model->player.x - PLAYER_RUN_SPEED, model->player.y)
+				&& !(airborneCheck(*model)))
+			{
+				model->player.x -= PLAYER_RUN_SPEED;				
+			}	
+			break;
+		case right:
+			if (IN_BOUNDS(model->player.x + PLAYER_RUN_SPEED, model->player.y)
+				&& !(airborneCheck(*model)))
+			{	
+				model->player.x += PLAYER_RUN_SPEED;	
+			}
+			break;
+		default:
+			break;
+	}
+	model->player.hitbox.topLeftX = model->player.x;
+	model->player.hitbox.bottomRightX = model->player.x + SPRITE_SIZE;
 }
 
 void increaseScore(struct Score *score)
 {
 	score->scoreAmnt += SCORE_ADD;
-	
-	/*TODO: add function to update to screen at later stage.*/
 }
 
 void decreaseTime(struct TimeRemaining *timeLeft)
 {
-	/*
-	if (timeLeft->ticks < fps)
-	{
-		timeLeft->ticks += 1;
-	}
-	else
-	{
-		timeLeft->wholeSecs -= 1;
-		timeLeft->ticks = 0;
-	}
-	This implementation sucks, will have to be revisited later.
-	Probably in stage 5 is when we handle this, not here.*/
 	timeLeft->wholeSecs -= TIME_SUB;
 }
 
@@ -261,13 +243,14 @@ bool airborneCheck (struct Model model)
 {
 	int platformNum = -1;
 	int inAirOrNo = true;
-	bool collidedTop = false;
 	platformNum = platformCollisionsCheck(model);
 	
 	if (platformNum != -1)
 	{
 		if (collideTopOfPlatform(model.player.hitbox,
-		model.platforms[platformNum].hitbox))
+		model.platforms[platformNum].hitbox) && /* might need to get rid of this \/*/
+		(model.player.hitbox.bottomRightY <= 
+		model.platforms[platformNum].y + PLAYER_MAX_FALL_SPEED))
 		{
 			inAirOrNo = false;	
 		}
@@ -283,7 +266,6 @@ void initPlatform(struct Platform *platform, unsigned int x,
 	platform->x = x;
 	platform->y = y;
 	platform->length = length;
-
 	platform->hitbox.topLeftX = x;
 	platform->hitbox.topLeftY = y;
 	platform->hitbox.bottomRightX = x + (SPRITE_SIZE * length);
@@ -333,17 +315,12 @@ void initModel(struct Model *model)
 	initPlatform(&(model->platforms[1]),P1_X,P1_Y,P1_LEN);
 	initPlatform(&(model->platforms[2]),P2_X,P2_Y,P2_LEN);
 	initPlatform(&(model->platforms[3]),P3_X,P3_Y,P3_LEN);
-	initPlatform(&(model->platforms[4]),P4_X,P4_Y,P4_LEN);
-	
+	initPlatform(&(model->platforms[4]),P4_X,P4_Y,P4_LEN);	
 	initPlatform(&(model->platforms[5]),P5_X,P5_Y,P5_LEN);
 	
 	initPlayer(&model->player);
-	
 	initCrystal(&model->crystal);
-	
 	initScore(&model->score);
-	
 	initTimer(&model->timeLeft);
-	
 	model->isTimer0 = false;
 }	

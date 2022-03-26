@@ -98,3 +98,7 @@ output the gamestate to the user, with every substructure within model being
 "rendered".
 */
 void render(const struct Model *model, UINT16 *base);
+
+void renderMovable(const struct Model *model, int x, int y, UINT16 *base);
+void wipeMovables(const struct Player *Player,const struct Crystal *crystal,
+				  UINT16 *base);

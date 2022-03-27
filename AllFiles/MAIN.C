@@ -11,6 +11,7 @@
 typedef unsigned long ULONG32;
 
 ULONG32 getTime();
+void keyInput(struct Model *model, UINT16 *base, int x, int y,char input);
 
 int main(){
 	int oldX = 0;
@@ -33,11 +34,27 @@ int main(){
 		renderMovable(&tenSecondHero,oldX,oldY,base);
 		if(Cconis()){
 			tst = (char)Cnecin();
-			timeNow = getTime();
+			keyInput(&tenSecondHero,base,oldX,oldY,tst);
 		}
 	}
 
 	return 0;
+}
+
+void keyInput(struct Model *model, UINT16 *base, int OldX, int OldY, char tst){
+	Direction playDirec;
+		if(tst == 'a'){
+			playDirec = left;
+		}
+		else if(tst == 'd'){
+			playDirec = right;
+		}
+		else if(tst == ' '){
+			playerJump(model);
+		}
+		plotBitmap16(base,OldX,OldY,CLEAR_BITMAP,MAX_HEIGHT);
+		playerRun(model,playDirec);
+	return;
 }
 
 ULONG32 getTime(){

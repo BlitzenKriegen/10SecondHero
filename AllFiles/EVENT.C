@@ -19,7 +19,7 @@ Details: 	Event handlers affect the game based on synchronous, asynchronous, or
 
 void makePlayerFall(struct Model *model)
 {
-	playerFall(&model->player);
+	playerFall(model);
 }
 
 void tickTimeDown(struct Model *model)

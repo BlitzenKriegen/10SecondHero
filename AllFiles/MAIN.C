@@ -9,14 +9,17 @@
 #define MAX_HEIGHT 16
 
 typedef unsigned long ULONG32;
-
+    
 ULONG32 getTime();
 void keyInput(struct Model *model, UINT16 *base, int x, int y,char input);
+
+void processAsyncEvents(struct Model *model);
+void processSyncEvents(struct Model *model);
 
 int main(){
 	int oldX = 0;
 	int oldY = 0;
-	ULONG32 timeNow;
+	ULONG32 timeNow, timeThen, timeElapsed;
 	struct Model tenSecondHero;
 	UINT16 *base = Physbase();
 	char tst = NULL;
@@ -66,4 +69,18 @@ ULONG32 getTime(){
 	timeNow = *timer;
 	Super(old_ssp);
 	return timeNow;
+}
+
+
+void processAsyncEvents(struct Model *model)
+{
+	
+	
+}
+
+
+void processSyncEvents(struct Model *model)
+{
+	
+	
 }

@@ -11,41 +11,50 @@
 typedef unsigned long ULONG32;
     
 ULONG32 getTime();
-void keyInput(struct Model *model, UINT16 *base, int x, int y,char input);
+void keyInput(struct Model *model, UINT16 *base,struct Model *last, char input);
 
 void processAsyncEvents(struct Model *model);
 void processSyncEvents(struct Model *model);
 
 int main(){
-	int oldX = 0;
-	int oldY = 0;
 	ULONG32 timeNow, timeThen, timeElapsed;
 	struct Model tenSecondHero;
+	struct Model lastFrame;
 	UINT16 *base = Physbase();
-	char tst = NULL;
+	char inp = NULL;
+	bool quit = false;
 
 	Vsync();
-	timeNow = getTime();
 	render(&tenSecondHero,base);
+	timeThen = getTime();
 	/*For future use as the game state loop.
 	when the user hits the escape button, the game
 	will immediately exit.*/
-	while(tst != ESC_ASCII){
-		oldX = tenSecondHero.player.x;
-		oldY = tenSecondHero.player.y;
-		playerFall(&tenSecondHero);
-		renderMovable(&tenSecondHero,oldX,oldY,base);
+	while(!quit){
+		timeNow = getTime();
+		if(timeNow - timeThen > 0){
+			timeThen = timeNow;
+			processSyncEvents(&tenSecondHero);
+			renderMovable(&tenSecondHero,&lastFrame,base);
+			timeNow = getTime();
+		}
 		if(Cconis()){
-			tst = (char)Cnecin();
-			keyInput(&tenSecondHero,base,oldX,oldY,tst);
+			inp = (char)Cconin();
+			if(inp == ESC_ASCII){
+				quit = true;
+			}
+			else {
+				processAsyncEvents(&tenSecondHero);
+			}
 		}
 	}
-
 	return 0;
 }
 
-void keyInput(struct Model *model, UINT16 *base, int OldX, int OldY, char tst){
+void keyInput(struct Model *model, UINT16 *base, struct Model *last, char tst){
 	Direction playDirec;
+	int OldX = last->player.x;
+	int OldY = last->player.y;
 		if(tst == 'a'){
 			playDirec = left;
 		}
@@ -74,13 +83,13 @@ ULONG32 getTime(){
 
 void processAsyncEvents(struct Model *model)
 {
-	
-	
+
+	return;
 }
 
 
 void processSyncEvents(struct Model *model)
 {
-	
-	
+	playerFall(model);
+	return;
 }

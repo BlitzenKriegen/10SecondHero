@@ -62,7 +62,9 @@ void renderScore(const struct Score *score,UINT16 *base){
 	return;
 }
 
-void renderMovable(const struct Model *model,int oldX, int oldY, UINT16 *base){
+void renderMovable(const struct Model *model,const struct Model *last, UINT16 *base){
+	int oldX = last->player.x;
+	int oldY = last->player.y;
 	plotBitmap16(base,oldX,oldY,CLEAR_BITMAP,MAX_HEIGHT);
 	wipeMovables(&model->player,&model->crystal,base);
 

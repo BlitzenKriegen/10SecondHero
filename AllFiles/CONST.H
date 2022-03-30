@@ -100,12 +100,15 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 #define SCORE_AMNT 0
 #define MAX_SCORE 9999
 
-/* asciis, gonna need to replace soon*/
+/* keys for the events*/
+#define ESC_KEY 0x0001001B
 #define ESC_ASCII 27
 #define A_ASCII 97
+#define A_KEY 0x001E0061
 #define D_ASCII 100
+#define D_KEY 0x00200064
 #define SPACE_ASCII 32
-
+#define SPACE_KEY 0x00390020
 
 typedef int bool;
 #define true 1

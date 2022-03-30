@@ -29,15 +29,15 @@ void tickTimeDown(struct Model *model)
 
 /* Asynchronous Events*/
 
-void movePlayer (struct Model *model, char key)
+void movePlayer (struct Model *model, unsigned long key)
 {
-	if (key == A_ASCII)
+	if (key == A_KEY)
 	{
 		playerRun(model, left);
-	} else if (key == D_ASCII)
+	} else if (key == D_KEY)
 	{
 		playerRun(model, right);
-	} else if (key == SPACE_ASCII)
+	} else if (key == SPACE_KEY)
 	{
 		playerJump(model);
 	}
@@ -53,7 +53,10 @@ bool isTimer0 (struct Model model)
 
 void crystalCollected (struct Model *model)
 {
-	increaseTime(&model->timeLeft);
-	increaseScore(&model->score);
-	crystalRandomSpawn(&model->crystal);
+	if (collision(model->player.hitbox, model->crystal.hitbox))
+	{
+		increaseTime(&model->timeLeft);
+		increaseScore(&model->score);
+		crystalRandomSpawn(&model->crystal);
+	}
 }

@@ -59,7 +59,7 @@ Details: depending on what keys the user pressed, the player will run left
 or right if A or D are pressed, respectively, and the player will jump if
 the user presses the space bar.
 */
-void movePlayer (struct Model *model, char key);
+void movePlayer (struct Model *model, unsigned long key);
 
 
 /* Conditional Events*/

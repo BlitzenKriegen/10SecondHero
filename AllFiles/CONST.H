@@ -19,7 +19,7 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 
 #define IN_BOUNDS(x, y) (x >= 0 && x < XBOUNDS && y >= 0 && y < YBOUNDS)
 
-#define SCORE_TICK 50
+#define SCORE_TICK 1
 #define FPS 35
 
 #define TIME_ADD 3
@@ -99,7 +99,7 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 #define SCORE_X 450
 #define SCORE_Y 380
 #define SCORE_AMNT 0
-#define MAX_SCORE 9999
+#define MAX_SCORE 99
 
 /* keys for the events*/
 #define ESC_KEY 0x0001001B

@@ -104,3 +104,4 @@ void wipeMovables(const struct Player *Player,const struct Crystal *crystal,
 				  UINT16 *base);
 
 void rerenderScore(struct Score *score);
+void rendernewScore(int ones, UINT16 *base);

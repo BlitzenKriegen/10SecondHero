@@ -31,72 +31,73 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 
 #define GROUND 0
 #define GROUND_X 0
-#define GROUND_Y 375
+#define GROUND_Y 355
 #define GROUND_LEN 40
 
 /* initilization data of other platforms*/
 /* platform 1*/
 #define P1_X 40
-#define P1_Y 300
+#define P1_Y 280
 #define P1_LEN 3
 /* platform 2*/
 #define P2_X 80
-#define P2_Y 130
+#define P2_Y 110
 #define P2_LEN 6
 /* platform 3*/
 #define P3_X 150
-#define P3_Y 250
+#define P3_Y 230
 #define P3_LEN 8
 /* platform 4*/
 #define P4_X 270
-#define P4_Y 180
+#define P4_Y 160
 #define P4_LEN 10
 /* platform 5*/
 #define P5_X 500
-#define P5_Y 225
+#define P5_Y 205
 #define P5_LEN 6
 
 /* initilization of player */
 #define PLAYER_X 340
-#define PLAYER_Y 350
+#define PLAYER_Y 330
 #define PLAYER_X_VEL 0
 #define PLAYER_Y_VEL 0 
-#define PLAYER_JUMP_SPEED -15
-#define PLAYER_MAX_FALL_SPEED 2
-#define PLAYER_RUN_SPEED 12
+#define PLAYER_JUMP_SPEED -16
+#define PLAYER_MAX_FALL_SPEED 5
+#define PLAYER_RUN_SPEED 8
+#define PLAYER_AIRDASH 8
 
 /* initilization of crystal */
 #define CRYSTAL_X 125
-#define CRYSTAL_Y 110
+#define CRYSTAL_Y 90
 
 #define MAX_RAND 6
 #define MIN_RAND 0
 #define SRAND_TEST_KEY 69
 #define CRYSTAL_RAND_X0 40
-#define CRYSTAL_RAND_Y0 355
+#define CRYSTAL_RAND_Y0 335
 #define CRYSTAL_RAND_X1 60
-#define CRYSTAL_RAND_Y1 280
+#define CRYSTAL_RAND_Y1 260
 #define CRYSTAL_RAND_X2 125
-#define CRYSTAL_RAND_Y2 110
+#define CRYSTAL_RAND_Y2 90
 #define CRYSTAL_RAND_X3 175
-#define CRYSTAL_RAND_Y3 230
+#define CRYSTAL_RAND_Y3 210
 #define CRYSTAL_RAND_X4 300
-#define CRYSTAL_RAND_Y4 160
+#define CRYSTAL_RAND_Y4 140
 #define CRYSTAL_RAND_X5 525
-#define CRYSTAL_RAND_Y5 205
+#define CRYSTAL_RAND_Y5 185
 #define CRYSTAL_RAND_X6 575
-#define CRYSTAL_RAND_Y6 355
+#define CRYSTAL_RAND_Y6 335
 
 
 /* initilization of timer */
 #define TIMER_X 10
-#define TIMER_Y 20
+#define TIMER_Y 380
 #define TIMER_SECS 10
 #define TIMER_TICKS 0
 
 /* initilization of score*/
 #define SCORE_X 450
-#define SCORE_Y 20
+#define SCORE_Y 380
 #define SCORE_AMNT 0
 #define MAX_SCORE 9999
 
@@ -137,5 +138,16 @@ extern UINT16 LETTER_E[BITMAP_HEIGHT];
 extern UINT16 LETTER_T[BITMAP_HEIGHT];
 extern UINT16 LETTER_I[BITMAP_HEIGHT];
 extern UINT16 LETTER_M[BITMAP_HEIGHT];
+
+extern UINT16 NUMBER_0[BITMAP_HEIGHT];
+extern UINT16 NUMBER_1[BITMAP_HEIGHT];
+extern UINT16 NUMBER_2[BITMAP_HEIGHT];
+extern UINT16 NUMBER_3[BITMAP_HEIGHT];
+extern UINT16 NUMBER_4[BITMAP_HEIGHT];
+extern UINT16 NUMBER_5[BITMAP_HEIGHT];
+extern UINT16 NUMBER_6[BITMAP_HEIGHT];
+extern UINT16 NUMBER_7[BITMAP_HEIGHT];
+extern UINT16 NUMBER_8[BITMAP_HEIGHT];
+extern UINT16 NUMBER_9[BITMAP_HEIGHT];
 
 #endif

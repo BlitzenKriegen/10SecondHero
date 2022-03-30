@@ -75,7 +75,7 @@ void drawPixel(UINT8 *base, int x, int y){
     }
 	return;
 }
-
+/*
 void plotBitmap16(UINT16 *base,
 		    unsigned int x, unsigned int y,
 		    const UINT16 *bitmap,
@@ -88,4 +88,43 @@ void plotBitmap16(UINT16 *base,
 		*(base + offset + (40*i)) = bitmap[i];
     }
     return;
+}*/
+
+void plotBitmap16(UINT16 *base, unsigned int x, unsigned int y, 
+					const UINT16 *bitmap, unsigned int height)
+{
+	UINT16 *draw = base + y * 40 + (x / 16);
+	int shift = x % 16; /*amount of shift required*/
+	unsigned int i;
+	
+	if (x <= 640 && y <= 400)
+	{
+		if (shift > 0) /*if shift needed*/
+		{
+			for (i = 0; i < height && draw < base + 16000; i++)
+			{
+				*draw |= (bitmap[i] >> shift);
+				draw += 40;
+			}
+			draw = draw - (40 * height) + 1;
+/*			draw = (base + y * 40 + (x / 16)) + 1;*/
+			for (i = 0; i < height && draw < base + 16000; i++)
+			{
+				*draw = (bitmap[i] << 16 - shift);
+				draw += 40;
+			}
+		}
+		else /* No shift needed*/
+		{
+			for  (i = 0; i < height; i++)
+			{
+				*draw |= bitmap[i];
+				draw += 40;
+			}
+		
+		}
+	}
+	
+	
+return;
 }

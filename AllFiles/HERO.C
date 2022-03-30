@@ -65,7 +65,6 @@ int main(){
 				gameIsRunning = false;
 			}
 			crystalCollected(&tenSecondHero);
-			
 			if (fallTime >= 20) /* have falling happen every x ticks?*/
 			{
 				fallTime = getTime();

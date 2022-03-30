@@ -15,7 +15,7 @@ Details: 	A model structure is created and initialized to set values from const.
 #define POS4 48
 #define POS5 64
 #define SCORE_TENS 110
-#define SCORE_ONES 130
+#define SCORE_ONES 120
 
 /*
 int main(){
@@ -78,6 +78,17 @@ void wipeMovables(const struct Player *player,const struct Crystal *crystal,
 				  UINT16 *base){
 	plotBitmap16(base,player->x,player->y,CLEAR_BITMAP,MAX_HEIGHT);
 	plotBitmap16(base,crystal->x,crystal->y,CLEAR_BITMAP,MAX_HEIGHT);
+	return;
+}
+
+void rerenderScore(struct Score *score)
+{
+	UINT16 *base = Physbase();
+	if(score->scoreAmnt > 10)
+	{
+		plotBitmap16(base,550,380,CLEAR_BITMAP,MAX_HEIGHT);
+	}
+	plotBitmap16(base,575,380,CLEAR_BITMAP,MAX_HEIGHT);
 	return;
 }
 

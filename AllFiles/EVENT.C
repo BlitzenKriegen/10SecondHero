@@ -14,6 +14,7 @@ Details: 	Event handlers affect the game based on synchronous, asynchronous, or
 
 #include "model.h"
 #include "event.h"
+#include "renderer.h"
 
 /* Synchronous Events */
 
@@ -58,5 +59,6 @@ void crystalCollected (struct Model *model)
 		increaseTime(&model->timeLeft);
 		increaseScore(&model->score);
 		crystalRandomSpawn(&model->crystal);
+		rerenderScore(&model->score);
 	}
 }

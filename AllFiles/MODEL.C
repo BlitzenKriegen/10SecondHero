@@ -144,15 +144,14 @@ void playerRun(struct Model *model, Direction direction)
 	switch (direction)
 	{
 		case left:
-			if (IN_BOUNDS(model->player.x - PLAYER_RUN_SPEED, model->player.y)
-				&& !(airborneCheck(*model)))
+			if (IN_BOUNDS(model->player.x - PLAYER_RUN_SPEED, model->player.y))
 			{
+				/* add collision check so he doesn't go inside platforms */
 				model->player.x -= PLAYER_RUN_SPEED;				
 			}	
 			break;
 		case right:
-			if (IN_BOUNDS(model->player.x + PLAYER_RUN_SPEED, model->player.y)
-				&& !(airborneCheck(*model)))
+			if (IN_BOUNDS(model->player.x + PLAYER_RUN_SPEED, model->player.y))
 			{	
 				model->player.x += PLAYER_RUN_SPEED;	
 			}

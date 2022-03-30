@@ -61,9 +61,9 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 #define PLAYER_Y 350
 #define PLAYER_X_VEL 0
 #define PLAYER_Y_VEL 0 
-#define PLAYER_JUMP_SPEED -12
-#define PLAYER_MAX_FALL_SPEED 5
-#define PLAYER_RUN_SPEED 8
+#define PLAYER_JUMP_SPEED -15
+#define PLAYER_MAX_FALL_SPEED 2
+#define PLAYER_RUN_SPEED 12
 
 /* initilization of crystal */
 #define CRYSTAL_X 125

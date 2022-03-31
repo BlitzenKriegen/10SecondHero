@@ -15,7 +15,7 @@ Details: 	A model structure is created and initialized to set values from const.
 #define POS4 48
 #define POS5 64
 #define SCORE_TENS 110
-#define SCORE_ONES 120
+#define SCORE_ONES 130
 
 /*
 int main(){
@@ -60,8 +60,8 @@ void renderScore(const struct Score *score,UINT16 *base){
 	plotBitmap16(base,(score->x)+POS3,score->y,LETTER_O,MAX_HEIGHT);
 	plotBitmap16(base,(score->x)+POS4,score->y,LETTER_R,MAX_HEIGHT);
 	plotBitmap16(base,(score->x)+POS5,score->y,LETTER_E,MAX_HEIGHT);
-	/*plotBitmap16(base,(score->x)+SCORE_TENS,score->y,NUMBER_0,MAX_HEIGHT);*/
-	plotBitmap16(base,(score->x)+SCORE_ONES,score->y,NUMBER_0,MAX_HEIGHT);
+	/*plotBitmap16(base,(score->x)+SCORE_TENS,score->y,NUMBER_0,MAX_HEIGHT);
+	plotBitmap16(base,(score->x)+SCORE_ONES,score->y,NUMBER_0,MAX_HEIGHT);*/
 	return;
 }
 
@@ -88,43 +88,45 @@ void rerenderScore(struct Score *score)
 	UINT16 *base = Physbase();
 	if(score->scoreAmnt > 10)
 	{
-		plotBitmap16(base,550,380,CLEAR_BITMAP,MAX_HEIGHT);
+		rendernewScore(tens,(score->x)+SCORE_TENS,score->y,base);
 	}
-	plotBitmap16(base,575,380,CLEAR_BITMAP,MAX_HEIGHT);
-	rendernewScore(ones,base);
+	rendernewScore(ones,(score->x)+SCORE_ONES,score->y,base);
 	return;
 }
 
-void rendernewScore(int ones, UINT16 *base)
+void rendernewScore(int digit, unsigned int x, unsigned int y, UINT16 *base)
 {
-	switch (ones)
+	plotBitmapAlt(base,x,y,CLEAR_BITMAP,MAX_HEIGHT);
+	switch (digit)
 	{
+		case 0:
+			plotBitmapAlt(base,x,y,NUMBER_0,MAX_HEIGHT);
 		case 1:
-			plotBitmap16(base,575,380,NUMBER_1,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_1,MAX_HEIGHT);
 			break;
 		case 2:
-			plotBitmap16(base,575,380,NUMBER_2,MAX_HEIGHT);	
+			plotBitmapAlt(base,x,y,NUMBER_2,MAX_HEIGHT);	
 			break;
 		case 3:
-			plotBitmap16(base,575,380,NUMBER_3,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_3,MAX_HEIGHT);
 			break;
 		case 4:
-			plotBitmap16(base,575,380,NUMBER_4,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_4,MAX_HEIGHT);
 			break;
 		case 5:
-			plotBitmap16(base,575,380,NUMBER_5,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_5,MAX_HEIGHT);
 			break;
 		case 6:
-			plotBitmap16(base,575,380,NUMBER_6,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_6,MAX_HEIGHT);
 			break;
 		case 7:
-			plotBitmap16(base,575,380,NUMBER_7,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_7,MAX_HEIGHT);
 			break;
 		case 8:
-			plotBitmap16(base,575,380,NUMBER_8,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_8,MAX_HEIGHT);
 			break;
 		case 9:
-			plotBitmap16(base,575,380,NUMBER_9,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_9,MAX_HEIGHT);
 			break;
 		default:
 			break;

@@ -98,7 +98,9 @@ Details:	Turns off all pixels in the frame buffer, making the whole screen white
 */	
 void clearScreen();
 
-void plot_bitmap_tst(UINT16 *base, unsigned int x, unsigned int y, 
-					const UINT16 *bitmap, unsigned int height);
+void plotBitmapAlt(UINT16 *base,
+		    unsigned int x, unsigned int y,
+		    const UINT16 *bitmap,
+		    unsigned int height);
 
 #endif

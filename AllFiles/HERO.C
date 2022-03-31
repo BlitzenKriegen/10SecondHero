@@ -34,7 +34,7 @@ int main(){
 	currTimerTicks = timeThen;
 	render(&tenSecondHero,base);
 
-	while(gameIsRunning){
+	while(gameIsRunning && tenSecondHero.score.scoreAmnt <= MAX_SCORE){
 		oldX = tenSecondHero.player.x;
 		oldY = tenSecondHero.player.y;
 		/* Async events*/
@@ -60,41 +60,33 @@ int main(){
 			timeNow = getTime();
 			timeThen = timeNow;
 
+			
+			if (fallTime >= 2) /* have falling happen every x ticks?*/
+			{
+				currFallTicks = getTime();
+				playerFall(&tenSecondHero);
+			}
+			
+			if (timerTime >= 70) 
+			{
+				currTimerTicks = getTime();
+				tickTimeDown(&tenSecondHero);
+				rerenderTimer(&(tenSecondHero.timeLeft));
+			}
+			
+			Vsync(); /* this somehow stops multiple plotting */
+			crystalCollected(&tenSecondHero);
+			rerenderScore(&(tenSecondHero.score));
+			renderMovable(&tenSecondHero, oldX, oldY, base);
 			if (isTimer0(tenSecondHero))
 			{
 				gameIsRunning = false;
 			}
-			crystalCollected(&tenSecondHero);
-			if (fallTime >= 20) /* have falling happen every x ticks?*/
-			{
-				fallTime = getTime();
-				playerFall(&tenSecondHero);
-			}
-			Vsync(); /* this somehow stops multiple plotting */
-			renderMovable(&tenSecondHero, oldX, oldY, base);
 		}
 	}
 
 	return 0;
 }
-
-/*
-void keyInput(struct Model *model, UINT16 *base, int OldX, int OldY, long tst){
-	Direction playDirec;
-		if(tst == 'a'){
-			playDirec = left;
-		}
-		else if(tst == 'd'){
-			playDirec = right;
-		}
-		else if(tst == ' '){
-			playerJump(model);
-		}
-		plotBitmap16(base,OldX,OldY,CLEAR_BITMAP,MAX_HEIGHT);
-		playerRun(model,playDirec);
-	return;
-}
-*/
 
 ULONG32 getTime(){
 	long old_ssp;

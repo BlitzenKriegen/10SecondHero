@@ -86,8 +86,7 @@ struct TimeRemaining
 {
 	unsigned int x;
 	unsigned int y;
-	unsigned int wholeSecs;
-	unsigned int ticks;
+	int wholeSecs;
 };
 
 /*The following structure holds the score of the played game.

@@ -146,27 +146,13 @@ void playerRun(struct Model *model, Direction direction)
 		case left:
 			if (IN_BOUNDS(model->player.x - PLAYER_RUN_SPEED, model->player.y))
 			{
-				if (airborneCheck(*model))
-				{
-					model->player.x -= PLAYER_AIRDASH;
-				}
-				else
-				{
-					model->player.x -= PLAYER_RUN_SPEED;
-				}
+				model->player.x -= PLAYER_RUN_SPEED;	
 			}	
 			break;
 		case right:
 			if (IN_BOUNDS(model->player.x + PLAYER_RUN_SPEED, model->player.y))
 			{	
-				if (airborneCheck(*model))
-				{
-					model->player.x += PLAYER_AIRDASH;
-				}
-				else
-				{
-					model->player.x += PLAYER_RUN_SPEED;
-				}					
+				model->player.x += PLAYER_RUN_SPEED;						
 			}
 			break;
 		default:
@@ -311,7 +297,6 @@ void initTimer(struct TimeRemaining *timeLeft)
 	timeLeft->x = TIMER_X;
 	timeLeft->y = TIMER_Y;
 	timeLeft->wholeSecs = TIMER_SECS;
-	timeLeft->ticks = TIMER_TICKS;
 }	
 
 void initScore(struct Score *score)

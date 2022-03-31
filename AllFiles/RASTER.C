@@ -125,6 +125,5 @@ void plotBitmap16(UINT16 *base, unsigned int x, unsigned int y,
 		}
 	}
 	
-	
-return;
+	return;
 }

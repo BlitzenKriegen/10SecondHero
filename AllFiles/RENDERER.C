@@ -16,6 +16,8 @@ Details: 	A model structure is created and initialized to set values from const.
 #define POS5 64
 #define SCORE_TENS 110
 #define SCORE_ONES 130
+#define TIMER_TENS 70
+#define TIMER_ONES 90
 
 /*
 int main(){
@@ -86,21 +88,35 @@ void rerenderScore(struct Score *score)
 	int ones = score->scoreAmnt % 10;
 	int tens = score->scoreAmnt / 10;
 	UINT16 *base = Physbase();
-	if(score->scoreAmnt > 10)
+	if(score->scoreAmnt >= 10)
 	{
-		rendernewScore(tens,(score->x)+SCORE_TENS,score->y,base);
+		renderNewScore(tens,(score->x)+SCORE_TENS,score->y,base);
 	}
-	rendernewScore(ones,(score->x)+SCORE_ONES,score->y,base);
+	renderNewScore(ones,(score->x)+SCORE_ONES,score->y,base);
 	return;
 }
 
-void rendernewScore(int digit, unsigned int x, unsigned int y, UINT16 *base)
+void rerenderTimer(struct TimeRemaining *timeLeft)
 {
-	plotBitmapAlt(base,x,y,CLEAR_BITMAP,MAX_HEIGHT);
+	int ones = (timeLeft->wholeSecs) % 10;
+	int tens = (timeLeft->wholeSecs) / 10;
+	UINT16 *base = Physbase();
+	if((timeLeft->wholeSecs) >= TIMER_SECS)
+	{
+		renderNewTimer(tens, (timeLeft->x) + TIMER_TENS, timeLeft->y, base);
+	}
+	renderNewTimer(ones, (timeLeft->x) + TIMER_ONES, timeLeft->y, base);
+	return;
+}
+
+void renderNewTimer(int digit, unsigned int x, unsigned int y, UINT16 *base)
+{
+	plotBitmapAlt(base, x, y, CLEAR_BITMAP, MAX_HEIGHT);
 	switch (digit)
 	{
 		case 0:
 			plotBitmapAlt(base,x,y,NUMBER_0,MAX_HEIGHT);
+			break;
 		case 1:
 			plotBitmapAlt(base,x,y,NUMBER_1,MAX_HEIGHT);
 			break;
@@ -131,7 +147,46 @@ void rendernewScore(int digit, unsigned int x, unsigned int y, UINT16 *base)
 		default:
 			break;
 	}
-	return;
+}
+
+void renderNewScore(int digit, unsigned int x, unsigned int y, UINT16 *base)
+{
+	plotBitmapAlt(base, x, y, CLEAR_BITMAP, MAX_HEIGHT);
+	switch (digit)
+	{
+		case 0:
+			plotBitmapAlt(base,x,y,NUMBER_0,MAX_HEIGHT);
+			break;
+		case 1:
+			plotBitmapAlt(base,x,y,NUMBER_1,MAX_HEIGHT);
+			break;
+		case 2:
+			plotBitmapAlt(base,x,y,NUMBER_2,MAX_HEIGHT);	
+			break;
+		case 3:
+			plotBitmapAlt(base,x,y,NUMBER_3,MAX_HEIGHT);
+			break;
+		case 4:
+			plotBitmapAlt(base,x,y,NUMBER_4,MAX_HEIGHT);
+			break;
+		case 5:
+			plotBitmapAlt(base,x,y,NUMBER_5,MAX_HEIGHT);
+			break;
+		case 6:
+			plotBitmapAlt(base,x,y,NUMBER_6,MAX_HEIGHT);
+			break;
+		case 7:
+			plotBitmapAlt(base,x,y,NUMBER_7,MAX_HEIGHT);
+			break;
+		case 8:
+			plotBitmapAlt(base,x,y,NUMBER_8,MAX_HEIGHT);
+			break;
+		case 9:
+			plotBitmapAlt(base,x,y,NUMBER_9,MAX_HEIGHT);
+			break;
+		default:
+			break;
+	}
 }
 
 /*

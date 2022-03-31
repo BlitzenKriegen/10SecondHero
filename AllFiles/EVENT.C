@@ -59,6 +59,5 @@ void crystalCollected (struct Model *model)
 		increaseTime(&model->timeLeft);
 		increaseScore(&model->score);
 		crystalRandomSpawn(&model->crystal);
-		rerenderScore(&model->score);
 	}
 }

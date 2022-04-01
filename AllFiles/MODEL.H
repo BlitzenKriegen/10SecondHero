@@ -61,6 +61,8 @@ struct Player
 {
 	unsigned int x;
 	unsigned int y;
+	unsigned int oldX;
+	unsigned int oldY;
 	int xVelocity;
 	int yVelocity;
 	struct Hitbox hitbox;
@@ -74,6 +76,8 @@ struct Crystal
 {
 	unsigned int x;
 	unsigned int y;
+	unsigned int oldX;
+	unsigned int oldY;
 	struct Hitbox hitbox;
 };
 
@@ -124,7 +128,7 @@ void playerJump (struct Model *model);
 
 void playerFall (struct Model *model);	
 
-void playerRun(struct Model *model, Direction direction);
+void playerRun(struct Model *model);
 
 int calcRand();
 

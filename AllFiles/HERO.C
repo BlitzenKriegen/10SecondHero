@@ -17,26 +17,20 @@ ULONG32 getTime();
 void processAsyncEvents(struct Model *model);
 void processSyncEvents(struct Model *model);
 
-bool gameIsRunning = true;
-
 int main(){
-	int oldX = 0;
-	int oldY = 0;
+	bool gameIsRunning = true;
 	ULONG32 timeNow, timeThen, timeElapsed,
 		fallTime, currFallTicks, timerTime, currTimerTicks;
 	struct Model tenSecondHero;
 	UINT16 *base = Physbase();
 	unsigned long currInput = 0x00000000;
 
-	/*Vsync();*/
 	timeThen = getTime();
 	currFallTicks = timeThen;
 	currTimerTicks = timeThen;
 	render(&tenSecondHero,base);
 
 	while(gameIsRunning && tenSecondHero.score.scoreAmnt <= MAX_SCORE){
-		oldX = tenSecondHero.player.x;
-		oldY = tenSecondHero.player.y;
 		/* Async events*/
 		if (Cconis())
 		{
@@ -59,8 +53,7 @@ int main(){
 		{
 			timeNow = getTime();
 			timeThen = timeNow;
-
-			
+	
 			if (fallTime >= 2) /* have falling happen every x ticks?*/
 			{
 				currFallTicks = getTime();
@@ -74,10 +67,11 @@ int main(){
 				rerenderTimer(&(tenSecondHero.timeLeft));
 			}
 			
-			Vsync(); /* this somehow stops multiple plotting */
+			playerRun(&tenSecondHero);
 			crystalCollected(&tenSecondHero);
+
 			rerenderScore(&(tenSecondHero.score));
-			renderMovable(&tenSecondHero, oldX, oldY, base);
+			renderMovable(&tenSecondHero, base);
 			if (isTimer0(tenSecondHero))
 			{
 				gameIsRunning = false;

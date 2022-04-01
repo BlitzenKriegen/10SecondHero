@@ -34,10 +34,10 @@ void movePlayer (struct Model *model, unsigned long key)
 {
 	if (key == A_KEY)
 	{
-		playerRun(model, left);
+		model->player.xVelocity = -1 *PLAYER_RUN_SPEED;
 	} else if (key == D_KEY)
 	{
-		playerRun(model, right);
+		model->player.xVelocity = PLAYER_RUN_SPEED;
 	} else if (key == SPACE_KEY)
 	{
 		playerJump(model);

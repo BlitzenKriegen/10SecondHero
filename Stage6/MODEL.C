@@ -138,7 +138,7 @@ void playerFall (struct Model *model)
 		model->player.hitbox.bottomRightY =
 		model->platforms[platformNum].y;
 		model->player.yVelocity = 0;	
-		model->player.hitbox.bottomRightY;
+		/*model->player.hitbox.bottomRightY;*/
 	}
 }
 
@@ -152,16 +152,49 @@ void playerJump (struct Model *model)
 
 void playerRun(struct Model *model)
 {
+	int platformNum = -1;
+	struct Hitbox possibleCollision;
+	possibleCollision.topLeftX = model->player.hitbox.topLeftX;
+	possibleCollision.bottomRightX = model->player.hitbox.bottomRightX +
+		model->player.xVelocity;
+	possibleCollision.topLeftY = model->player.hitbox.topLeftY;
+	possibleCollision.bottomRightY = model->player.hitbox.bottomRightY +
+		model->player.xVelocity;
+	
 	model->player.oldX = model->player.x;
 	model->player.oldY = model->player.y;
+	
+	
 	if (IN_BOUNDS(model->player.x + model->player.xVelocity, model->player.y))
 	{
-			model->player.x += model->player.xVelocity;	
+		platformNum = possibleCollisionsCheck(*model, possibleCollision);
+		if (airborneCheck(*model) && platformNum != -1)
+		{
+			/* don't let player move to direction of possible collision*/
+			model->player.xVelocity = 0;
+		}	
+		model->player.x += model->player.xVelocity;
 	}	
 	model->player.xVelocity = 0;
 	
 	model->player.hitbox.topLeftX = model->player.x;
 	model->player.hitbox.bottomRightX = model->player.x + SPRITE_SIZE;
+}
+
+int possibleCollisionsCheck(struct Model model, struct Hitbox hitbox) 
+{
+	int collidedPlatform = -1;
+	bool collided = false;
+	int i;
+	for (i = 0; i < PLATFORM_AMNT; i++) 
+	{
+		collided = collision(hitbox, model.platforms[i].hitbox);
+		if (collided)
+		{
+			collidedPlatform = i;
+		}
+	}
+	return collidedPlatform;
 }
 
 void increaseScore(struct Score *score)

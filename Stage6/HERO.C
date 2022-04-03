@@ -1,34 +1,51 @@
 #include <osbind.h>
 #include <stdio.h>
+#include <string.h>
 #include "const.h"
 #include "renderer.h"
 #include "model.h"
 #include "event.h"
 
 #define CLOCK 0x462
-#define MAX_HEIGHT 16
+#define BUFFER_SIZE 32000
+#define BUFFER_256 32256
+#define SECOND_TICK 70
 
 typedef unsigned long ULONG32;
-    
+
 ULONG32 getTime();
 
-/*void keyInput(struct Model *model, UINT16 *base, int x, int y, long input); */
-
-void processAsyncEvents(struct Model *model);
-void processSyncEvents(struct Model *model);
+const UINT8 buffer2[BUFFER_256];
+const UINT8 staticBuffer[BUFFER_SIZE]; 
 
 int main(){
+	UINT16 *base1 = (UINT16 *)Physbase();
+	UINT16 *base2;
+	UINT16 *staticBuffPtr = (UINT16 *)staticBuffer;
+	UINT16 offset;
+	UINT16 align;
+	UINT16 *ptr = staticBuffPtr;
 	bool gameIsRunning = true;
 	ULONG32 timeNow, timeThen, timeElapsed,
 		fallTime, currFallTicks, timerTime, currTimerTicks;
 	struct Model tenSecondHero;
-	UINT16 *base = Physbase();
-	unsigned long currInput = 0x00000000;
-
+	unsigned long currInput = 0;
+	bool swapBuff = true;
+	srand(SRAND_TEST_KEY);
+	initModel(&tenSecondHero);
+	
+	offset = (UINT16)buffer2;
+	align = offset % 256;
+	base2 = (UINT16 *)(buffer2 + (256 - align));
+	
+	renderStatic(&tenSecondHero,staticBuffPtr);
+	
 	timeThen = getTime();
 	currFallTicks = timeThen;
 	currTimerTicks = timeThen;
-	render(&tenSecondHero,base);
+	
+	/*memcpy(base2,staticBuffPtr, BUFFER_SIZE);
+	renderMovable(&tenSecondHero,base2);*/
 
 	while(gameIsRunning && tenSecondHero.score.scoreAmnt <= MAX_SCORE){
 		/* Async events*/
@@ -42,43 +59,56 @@ int main(){
 			{
 				movePlayer(&tenSecondHero, currInput);
 			}		
-		}	
-		
+		}
+
 		timeNow = getTime();
 		timeElapsed = timeNow - timeThen;
 		fallTime = timeNow - currFallTicks;
 		timerTime = timeNow - currTimerTicks;
-		/* Sync events*/
+
 		if (timeElapsed > 0)
 		{
 			timeNow = getTime();
 			timeThen = timeNow;
 	
-			if (fallTime >= 2) /* have falling happen every x ticks?*/
+			if (fallTime >= 1) /* have falling happen every x ticks?*/
 			{
 				currFallTicks = getTime();
 				playerFall(&tenSecondHero);
 			}
 			
-			if (timerTime >= 70) 
+			if (timerTime >= SECOND_TICK) 
 			{
 				currTimerTicks = getTime();
 				tickTimeDown(&tenSecondHero);
-				rerenderTimer(&(tenSecondHero.timeLeft));
 			}
 			
 			playerRun(&tenSecondHero);
 			crystalCollected(&tenSecondHero);
-
-			rerenderScore(&(tenSecondHero.score));
-			renderMovable(&tenSecondHero, base);
+			
+			if (swapBuff)
+			{
+				memcpy(base1, staticBuffPtr, BUFFER_SIZE);
+				renderMovable(&tenSecondHero, base1);
+				Setscreen(-1, base1, -1);
+				
+				Vsync();
+			} else
+			{
+				memcpy(base2, staticBuffPtr, BUFFER_SIZE);
+				renderMovable(&tenSecondHero, base2);
+				Setscreen(-1, base2, -1);
+				
+				Vsync();
+			}
+			swapBuff = !swapBuff;
 			if (isTimer0(tenSecondHero))
 			{
 				gameIsRunning = false;
 			}
 		}
 	}
-
+	Setscreen(-1, base1, -1);
 	return 0;
 }
 

@@ -12,15 +12,13 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 
 
 /* */
+#define BITS_IN_WORD 16
 #define BITMAP_HEIGHT 16
 #define SPRITE_SIZE 16
 #define XBOUNDS 640
 #define YBOUNDS 400
 
 #define IN_BOUNDS(x, y) (x >= 0 && x < XBOUNDS && y >= 0 && y < YBOUNDS)
-
-#define SCORE_TICK 1
-#define FPS 35
 
 #define TIME_ADD 3
 #define TIME_SUB 1
@@ -61,9 +59,9 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 #define PLAYER_Y 330
 #define PLAYER_X_VEL 0
 #define PLAYER_Y_VEL 0 
-#define PLAYER_JUMP_SPEED -15
-#define PLAYER_MAX_FALL_SPEED 7
-#define PLAYER_RUN_SPEED 12
+#define PLAYER_JUMP_SPEED -14
+#define PLAYER_MAX_FALL_SPEED 8
+#define PLAYER_RUN_SPEED 16
 
 /* initilization of crystal */
 #define CRYSTAL_X 125

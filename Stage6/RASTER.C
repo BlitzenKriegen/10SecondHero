@@ -6,42 +6,6 @@ void clearScreen(){
 	return;
 }
 
-/*
-this clearscreen function is relatively slow, just kept
-as a backup 
-void clearScreen(UINT16 *base){
-	int x;
-	int y;
-	int height = BITMAP_HEIGHT;
-	UINT16 clr[16]=
-    {
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-	0x0000,
-    };
-	
-	for(x = 0; x < XBOUNDS; x+=16){
-		for(y = 0; y < YBOUNDS; y+=16){
-			plotBitmap16(base,x,y,clr,height);
-		}
-	}
-	return;
-}
-*/
-
 void drawVertical(UINT16 *base,
 			  int x, int y,
 			  const UINT16 *bitmap,
@@ -83,9 +47,9 @@ void plotBitmapAlt(UINT16 *base,
     int i;
     int offset;
 	
-    offset = (x>>4) + (y*40);
+    offset = (x >> 4) + (y * 40);
     for(i = 0; i < height; i++){
-		*(base + offset + (40*i)) = bitmap[i];
+		*(base + offset + (40 * i)) = bitmap[i];
     }
     return;
 }
@@ -97,9 +61,9 @@ void plotBitmap8(UINT8 *base,
     int i;
     int offset;
 	
-    offset = (x>>3) + (y*40);
+    offset = (x >> 3) + (y * 40);
     for(i = 0; i < height; i++){
-		*(base + offset + (40*i)) = bitmap[i];
+		*(base + offset + (40 * i)) = bitmap[i];
     }
     return;
 }
@@ -107,36 +71,16 @@ void plotBitmap8(UINT8 *base,
 void plotBitmap16(UINT16 *base, unsigned int x, unsigned int y, 
 					const UINT16 *bitmap, unsigned int height)
 {
-	UINT16 *draw = base + y * 40 + (x / 16);
-	int shift = x % 16; /*amount of shift required*/
-	unsigned int i;
-	
-	if (x <= 640 && y <= 400)
+	int i, offset, shift_F, shift_B;
+	offset = (x >> 4) + (y * 40);
+	shift_F = x & (BITS_IN_WORD - 1);
+	shift_B = (BITS_IN_WORD) - (x & (BITS_IN_WORD - 1));
+
+	for (i = 0; i < height; i++)
 	{
-		if (shift > 0) /*if shift needed*/
-		{
-			for (i = 0; i < height && draw < base + 16000; i++)
-			{
-				*draw |= (bitmap[i] >> shift);
-				draw += 40;
-			}
-			draw = draw - (40 * height) + 1;
-/*			draw = (base + y * 40 + (x / 16)) + 1;*/
-			for (i = 0; i < height && draw < base + 16000; i++)
-			{
-				*draw = (bitmap[i] << 16 - shift);
-				draw += 40;
-			}
-		}
-		else /* No shift needed*/
-		{
-			for  (i = 0; i < height; i++)
-			{
-				*draw |= bitmap[i];
-				draw += 40;
-			}
-		
-		}
+		*(base + offset + (40 * i)) |= ((bitmap[i]) >> shift_F);
+
+		*(base + offset + 1 + (40 * i)) |= ((bitmap[i]) << shift_B);
 	}
 	
 	return;

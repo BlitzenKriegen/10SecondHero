@@ -131,6 +131,8 @@ void playerFall (struct Model *model);
 
 void playerRun(struct Model *model);
 
+int possibleCollisionsCheck(struct Model model, struct Hitbox hitbox);
+
 int calcRand(int currNum);
 
 void crystalRandomSpawn(struct Crystal *crystal);

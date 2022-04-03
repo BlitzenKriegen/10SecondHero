@@ -14,8 +14,8 @@ Details: 	A model structure is created and initialized to set values from const.
 #define POS3 32
 #define POS4 48
 #define POS5 64
-#define SCORE_TENS 110
-#define SCORE_ONES 130
+#define SCORE_TENS 105
+#define SCORE_ONES 125
 #define TIMER_TENS 70
 #define TIMER_ONES 90
 
@@ -37,7 +37,6 @@ void renderCrystal(const struct Crystal *crystal,UINT16 *base){
 	plotBitmap16(base,crystal->x,crystal->y,CRYSTAL_BITMAP,MAX_HEIGHT);
 	return;
 }
-
 
 void renderPlatform(const struct Platform platform[],UINT16 *base){
 	int i = 0;
@@ -191,9 +190,7 @@ void renderStatic(const struct Model *model, UINT16 *base){
 	clearScreen();
 	initModel(model);
 	renderPlatform(model->platforms,base);
-
 	renderTimer(&model->timeLeft,base);
 	renderScore(&model->score,base);
-	
 	return;
 }

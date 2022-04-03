@@ -1,12 +1,12 @@
 GCC = cc68x
 
-OBJ = buffer.o renderer.o model.o event.o const.o raster.o
+OBJ = hero.o renderer.o model.o event.o const.o raster.o
 
 tst_exc: $(OBJ)
 	$(GCC) -g $(OBJ) -o comp
 
-buffer.o: buffer.c const.h
-	$(GCC) -g -c buffer.c
+hero.o: hero.c const.h
+	$(GCC) -g -c hero.c
 
 renderer.o: renderer.c renderer.h raster.h const.h
 	$(GCC) -g -c renderer.c

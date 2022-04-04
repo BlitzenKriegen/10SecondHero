@@ -9,15 +9,6 @@ Details: 	A model structure is created and initialized to set values from const.
 			bitmaps.
 */
 #include "renderer.h"
-#define MAX_HEIGHT 16
-#define POS2 16
-#define POS3 32
-#define POS4 48
-#define POS5 64
-#define SCORE_TENS 105
-#define SCORE_ONES 125
-#define TIMER_TENS 70
-#define TIMER_ONES 90
 
 /*
 int main(){
@@ -29,12 +20,12 @@ int main(){
 */
 
 void renderPlayer(const struct Player *Player,UINT16 *base){
-	plotBitmap16(base,Player->x,Player->y,PLAYER_BITMAP,MAX_HEIGHT);
+	plotBitmap16(base,Player->x,Player->y,PLAYER_BITMAP,BITMAP_HEIGHT);
 	return;
 }
 
 void renderCrystal(const struct Crystal *crystal,UINT16 *base){
-	plotBitmap16(base,crystal->x,crystal->y,CRYSTAL_BITMAP,MAX_HEIGHT);
+	plotBitmap16(base,crystal->x,crystal->y,CRYSTAL_BITMAP,BITMAP_HEIGHT);
 	return;
 }
 
@@ -42,25 +33,25 @@ void renderPlatform(const struct Platform platform[],UINT16 *base){
 	int i = 0;
 	for (i = 0;i < 6; i++) {
 		drawHorizontal(base,platform[i].x,platform[i].y,
-		BLACKOUT_BITMAP, MAX_HEIGHT, platform[i].length);	
+		BLACKOUT_BITMAP, BITMAP_HEIGHT, platform[i].length);	
 	}
 	return;
 }
 
 void renderTimer(const struct TimeRemaining *timeLeft, UINT16 *base){
-	plotBitmap16(base,timeLeft->x,timeLeft->y,LETTER_T,MAX_HEIGHT);
-	plotBitmap16(base,(timeLeft->x)+POS2,timeLeft->y,LETTER_I,MAX_HEIGHT);
-	plotBitmap16(base,(timeLeft->x)+POS3,timeLeft->y,LETTER_M,MAX_HEIGHT);
-	plotBitmap16(base,(timeLeft->x)+POS4,timeLeft->y,LETTER_E,MAX_HEIGHT);
+	plotBitmap16(base,timeLeft->x,timeLeft->y,LETTER_T,BITMAP_HEIGHT);
+	plotBitmap16(base,(timeLeft->x)+POS2,timeLeft->y,LETTER_I,BITMAP_HEIGHT);
+	plotBitmap16(base,(timeLeft->x)+POS3,timeLeft->y,LETTER_M,BITMAP_HEIGHT);
+	plotBitmap16(base,(timeLeft->x)+POS4,timeLeft->y,LETTER_E,BITMAP_HEIGHT);
 	return;
 }
 
 void renderScore(const struct Score *score,UINT16 *base){
-	plotBitmap16(base,score->x,score->y,LETTER_S,MAX_HEIGHT);
-	plotBitmap16(base,(score->x)+POS2,score->y,LETTER_C,MAX_HEIGHT);
-	plotBitmap16(base,(score->x)+POS3,score->y,LETTER_O,MAX_HEIGHT);
-	plotBitmap16(base,(score->x)+POS4,score->y,LETTER_R,MAX_HEIGHT);
-	plotBitmap16(base,(score->x)+POS5,score->y,LETTER_E,MAX_HEIGHT);
+	plotBitmap16(base,score->x,score->y,LETTER_S,BITMAP_HEIGHT);
+	plotBitmap16(base,(score->x)+POS2,score->y,LETTER_C,BITMAP_HEIGHT);
+	plotBitmap16(base,(score->x)+POS3,score->y,LETTER_O,BITMAP_HEIGHT);
+	plotBitmap16(base,(score->x)+POS4,score->y,LETTER_R,BITMAP_HEIGHT);
+	plotBitmap16(base,(score->x)+POS5,score->y,LETTER_E,BITMAP_HEIGHT);
 	return;
 }
 
@@ -98,38 +89,38 @@ void rerenderTimer(struct TimeRemaining *timeLeft, UINT16 *base)
 
 void renderNewTimer(int digit, unsigned int x, unsigned int y, UINT16 *base)
 {
-	plotBitmapAlt(base, x, y, CLEAR_BITMAP, MAX_HEIGHT);
+	plotBitmapAlt(base, x, y, CLEAR_BITMAP, BITMAP_HEIGHT);
 	switch (digit)
 	{
 		case 0:
-			plotBitmapAlt(base,x,y,NUMBER_0,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_0,BITMAP_HEIGHT);
 			break;
 		case 1:
-			plotBitmapAlt(base,x,y,NUMBER_1,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_1,BITMAP_HEIGHT);
 			break;
 		case 2:
-			plotBitmapAlt(base,x,y,NUMBER_2,MAX_HEIGHT);	
+			plotBitmapAlt(base,x,y,NUMBER_2,BITMAP_HEIGHT);	
 			break;
 		case 3:
-			plotBitmapAlt(base,x,y,NUMBER_3,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_3,BITMAP_HEIGHT);
 			break;
 		case 4:
-			plotBitmapAlt(base,x,y,NUMBER_4,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_4,BITMAP_HEIGHT);
 			break;
 		case 5:
-			plotBitmapAlt(base,x,y,NUMBER_5,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_5,BITMAP_HEIGHT);
 			break;
 		case 6:
-			plotBitmapAlt(base,x,y,NUMBER_6,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_6,BITMAP_HEIGHT);
 			break;
 		case 7:
-			plotBitmapAlt(base,x,y,NUMBER_7,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_7,BITMAP_HEIGHT);
 			break;
 		case 8:
-			plotBitmapAlt(base,x,y,NUMBER_8,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_8,BITMAP_HEIGHT);
 			break;
 		case 9:
-			plotBitmapAlt(base,x,y,NUMBER_9,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_9,BITMAP_HEIGHT);
 			break;
 		default:
 			break;
@@ -138,38 +129,38 @@ void renderNewTimer(int digit, unsigned int x, unsigned int y, UINT16 *base)
 
 void renderNewScore(int digit, unsigned int x, unsigned int y, UINT16 *base)
 {
-	plotBitmapAlt(base, x, y, CLEAR_BITMAP, MAX_HEIGHT);
+	plotBitmapAlt(base, x, y, CLEAR_BITMAP, BITMAP_HEIGHT);
 	switch (digit)
 	{
 		case 0:
-			plotBitmapAlt(base,x,y,NUMBER_0,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_0,BITMAP_HEIGHT);
 			break;
 		case 1:
-			plotBitmapAlt(base,x,y,NUMBER_1,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_1,BITMAP_HEIGHT);
 			break;
 		case 2:
-			plotBitmapAlt(base,x,y,NUMBER_2,MAX_HEIGHT);	
+			plotBitmapAlt(base,x,y,NUMBER_2,BITMAP_HEIGHT);	
 			break;
 		case 3:
-			plotBitmapAlt(base,x,y,NUMBER_3,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_3,BITMAP_HEIGHT);
 			break;
 		case 4:
-			plotBitmapAlt(base,x,y,NUMBER_4,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_4,BITMAP_HEIGHT);
 			break;
 		case 5:
-			plotBitmapAlt(base,x,y,NUMBER_5,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_5,BITMAP_HEIGHT);
 			break;
 		case 6:
-			plotBitmapAlt(base,x,y,NUMBER_6,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_6,BITMAP_HEIGHT);
 			break;
 		case 7:
-			plotBitmapAlt(base,x,y,NUMBER_7,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_7,BITMAP_HEIGHT);
 			break;
 		case 8:
-			plotBitmapAlt(base,x,y,NUMBER_8,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_8,BITMAP_HEIGHT);
 			break;
 		case 9:
-			plotBitmapAlt(base,x,y,NUMBER_9,MAX_HEIGHT);
+			plotBitmapAlt(base,x,y,NUMBER_9,BITMAP_HEIGHT);
 			break;
 		default:
 			break;

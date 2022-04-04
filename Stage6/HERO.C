@@ -6,11 +6,6 @@
 #include "model.h"
 #include "event.h"
 
-#define CLOCK 0x462
-#define BUFFER_SIZE 32000
-#define BUFFER_256 32256
-#define SECOND_TICK 70
-
 typedef unsigned long ULONG32;
 
 ULONG32 getTime();

@@ -5,7 +5,7 @@ OBJ = hero.o renderer.o model.o event.o const.o raster.o
 tst_exc: $(OBJ)
 	$(GCC) -g $(OBJ) -o comp
 
-hero.o: hero.c const.h
+hero.o: hero.c hero.h const.h
 	$(GCC) -g -c hero.c
 
 renderer.o: renderer.c renderer.h raster.h const.h

@@ -1,15 +1,5 @@
-#include <osbind.h>
-#include <stdio.h>
-#include <string.h>
-#include "const.h"
-#include "renderer.h"
-#include "model.h"
-#include "event.h"
 
-typedef unsigned long ULONG32;
-
-ULONG32 getTime();
-
+#include "hero.h"
 const UINT8 buffer2[BUFFER_256];
 const UINT8 staticBuffer[BUFFER_SIZE]; 
 
@@ -21,8 +11,7 @@ int main(){
 	UINT16 align;
 	UINT16 *ptr = staticBuffPtr;
 	bool gameIsRunning = true;
-	ULONG32 timeNow, timeThen, timeElapsed,
-		fallTime, currFallTicks, timerTime, currTimerTicks;
+	ULONG32 timeNow, timeThen, timeElapsed, timerTime, currTimerTicks;
 	struct Model tenSecondHero;
 	unsigned long currInput = 0;
 	bool swapBuff = true;
@@ -33,14 +22,10 @@ int main(){
 	align = offset % 256;
 	base2 = (UINT16 *)(buffer2 + (256 - align));
 	
-	renderStatic(&tenSecondHero,staticBuffPtr);
-	
 	timeThen = getTime();
-	currFallTicks = timeThen;
 	currTimerTicks = timeThen;
 	
-	/*memcpy(base2,staticBuffPtr, BUFFER_SIZE);
-	renderMovable(&tenSecondHero,base2);*/
+	renderStatic(&tenSecondHero,staticBuffPtr);
 
 	while(gameIsRunning && tenSecondHero.score.scoreAmnt <= MAX_SCORE){
 		/* Async events*/
@@ -58,29 +43,16 @@ int main(){
 
 		timeNow = getTime();
 		timeElapsed = timeNow - timeThen;
-		fallTime = timeNow - currFallTicks;
 		timerTime = timeNow - currTimerTicks;
 
+		/* Sync events*/
 		if (timeElapsed > 0)
 		{
 			timeNow = getTime();
 			timeThen = timeNow;
-	
-			if (fallTime >= 1) /* have falling happen every x ticks?*/
-			{
-				currFallTicks = getTime();
-				playerFall(&tenSecondHero);
-			}
-			
-			if (timerTime >= SECOND_TICK) 
-			{
-				currTimerTicks = getTime();
-				tickTimeDown(&tenSecondHero);
-			}
-			
-			playerRun(&tenSecondHero);
-			crystalCollected(&tenSecondHero);
-			
+				
+			processSyncEvents(&tenSecondHero, &currTimerTicks,
+				&timerTime, &gameIsRunning);
 			if (swapBuff)
 			{
 				memcpy(base1, staticBuffPtr, BUFFER_SIZE);
@@ -97,14 +69,28 @@ int main(){
 				Vsync();
 			}
 			swapBuff = !swapBuff;
-			if (isTimer0(tenSecondHero))
-			{
-				gameIsRunning = false;
-			}
 		}
 	}
 	Setscreen(-1, base1, -1);
 	return 0;
+}
+
+void processSyncEvents(struct Model *model, ULONG32 *currTimerTicks, 
+	ULONG32 *timerTime, bool *gameIsRunning)
+{
+	playerFall(model);			
+	if (*timerTime >= SECOND_TICK) 
+	{
+		*currTimerTicks = getTime();
+		tickTimeDown(model);
+	}
+			
+	playerRun(model);
+	crystalCollected(model);
+	if (isTimer0(*model))
+	{
+		*gameIsRunning = false;
+	}
 }
 
 ULONG32 getTime(){

@@ -10,7 +10,16 @@ Purpose: 	Contains the main game loop.
 const UINT8 buffer2[BUFFER_256];
 const UINT8 staticBuffer[BUFFER_SIZE]; 
 
-int main(){
+int main()
+{
+	renderSplashscreen();
+	splashScreenMenu();
+	gameLoop();	
+	return 0;
+}
+
+void gameLoop()
+{
 	UINT16 *base1 = getVideoBase();
 	UINT16 *base2;
 	UINT16 *staticBuffPtr = (UINT16 *)staticBuffer;
@@ -79,7 +88,6 @@ int main(){
 		}
 	}
 	setVideoBase(base1);
-	return 0;
 }
 
 void processSyncEvents(struct Model *model, ULONG32 *currTimerTicks, 

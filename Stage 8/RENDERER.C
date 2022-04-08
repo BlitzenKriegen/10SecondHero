@@ -158,10 +158,16 @@ void renderNewScore(int digit, unsigned int x, unsigned int y, UINT16 *base)
 	}
 }
 
+void renderSplashScreen(UINT32* base) {
+ /* clear_qk(base);*/
+	plotScreen(base, SPLASH_SCREEN);
+}
+
+
 /*
 Subroutine: render
 Input Parameters: model
-					The Gamestate and all structures accociated with it.
+The Gamestate and all structures accociated with it.
 Purpose: Initialises the gamestate to the starting position.
 Details: The function clears the screen before initializing the gamestate to
 a starting position. When this has finished, the function then goes on to

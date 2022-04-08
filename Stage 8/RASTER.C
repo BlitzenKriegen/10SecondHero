@@ -40,6 +40,15 @@ void drawHorizontal(UINT16 *base,
 	return;
 }
 
+void plotScreen(UINT32* base, UINT32* bitmap) {
+  int i;
+  for(i = 0; i < SPLASH_BMP_SIZE; i++)
+	{
+		*(base + i) = bitmap[i];
+	}
+}
+
+
 void drawPixel(UINT8 *base, int x, int y){
 	if( x >= 0 && x < XBOUNDS &&
         y >= 0 && y < YBOUNDS ) {

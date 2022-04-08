@@ -111,3 +111,5 @@ void renderNewScore(int ones,unsigned int x,unsigned int y, UINT16 *base);
 void rerenderTimer(struct TimeRemaining *timeLeft, UINT16 *base);
 
 void renderNewTimer(int digit, unsigned int x, unsigned int y, UINT16 *base);
+
+void renderSplashScreen(UINT32* base);

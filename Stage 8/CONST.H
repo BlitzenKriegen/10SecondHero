@@ -19,6 +19,7 @@ RASTER MODULE & GENERAL STUFF
 #define BITS_IN_WORD 16
 #define BITMAP_HEIGHT 16
 #define SPRITE_SIZE 16
+#define SPLASH_BMP_SIZE 8000
 #define XBOUNDS 640
 #define YBOUNDS 400
 #define IN_BOUNDS(x, y) (x >= 0 && x < XBOUNDS && y >= 0 && y < YBOUNDS)

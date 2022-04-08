@@ -24,6 +24,8 @@ ULONG32 getTime();
 
 void processSyncEvents(struct Model *model, ULONG32 *currTimerTicks, 
 	ULONG32 *timerTime, bool *gameIsRunning);
+	
+void gameLoop();
 
 
 #endif

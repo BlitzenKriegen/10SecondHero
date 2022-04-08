@@ -16,6 +16,8 @@ Details: 	Event handlers affect the game based on synchronous, asynchronous, or
 #include "event.h"
 #include "renderer.h"
 
+bool muted = false;
+
 /* Synchronous Events */
 
 void makePlayerFall(struct Model *model)
@@ -41,8 +43,7 @@ void movePlayer (struct Model *model, unsigned long key)
 	} else if (key == SPACE_KEY)
 	{
 		playerJump(model);
-	}
-		
+	}	
 	
 }
 /* Conditional Events*/

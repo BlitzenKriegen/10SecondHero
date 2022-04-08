@@ -5,10 +5,11 @@
 #include "renderer.h"
 #include "model.h"
 #include "event.h"
-#include "psg.h"
 #include "music.h"
+#include "psg.h"
 
 UINT32 getTime();
+void muteUnmute(bool muted);
 
 const UINT8 buffer2[BUFFER_256];
 const UINT8 staticBuffer[BUFFER_SIZE]; 
@@ -21,8 +22,10 @@ int main(){
 	UINT16 align;
 	UINT16 *ptr = staticBuffPtr;
 	bool gameIsRunning = true;
+	bool muted = false;
 	UINT32 timeNow, timeThen, timeElapsed,
 		fallTime, currFallTicks, timerTime, currTimerTicks;
+	UINT32 lastNotePlayed = 0;
 	struct Model tenSecondHero;
 	unsigned long currInput = 0;
 	bool swapBuff = true;
@@ -39,8 +42,10 @@ int main(){
 	currFallTicks = timeThen;
 	currTimerTicks = timeThen;
 	
+	/*memcpy(base2,staticBuffPtr, BUFFER_SIZE);
+	renderMovable(&tenSecondHero,base2);*/
 	start_music();
-
+	
 	while(gameIsRunning && tenSecondHero.score.scoreAmnt <= MAX_SCORE){
 		/* Async events*/
 		if (Cconis())
@@ -75,6 +80,10 @@ int main(){
 			{
 				currTimerTicks = getTime();
 				tickTimeDown(&tenSecondHero);
+			}
+			if (timerTime - lastNotePlayed >= 20){
+				update_music(timerTime);
+				lastNotePlayed = timerTime;
 			}
 			
 			playerRun(&tenSecondHero);

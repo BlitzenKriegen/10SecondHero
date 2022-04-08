@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "psg.h"
 #define CHANNEL_OFFSET 8
 /*CHANNEL_OFFSET exists to skip making
@@ -33,7 +34,7 @@ void stop_sound(){
 }
 
 void set_volume(int channel, int volume){
-	write_psg((channel+CHANNEL_OFFSET),volume);
+	write_psg(channel,volume);
 	return;
 }
 

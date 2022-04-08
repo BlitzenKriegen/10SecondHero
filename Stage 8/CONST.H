@@ -1,6 +1,6 @@
 /*
-Names:  	Enrik R
-			Kiril S
+Names:  	Enrik Rushiti
+			Kiril Sikov
 
 Module:		Const
 

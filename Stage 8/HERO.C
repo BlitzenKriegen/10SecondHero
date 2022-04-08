@@ -1,4 +1,11 @@
+/*
+Names:  	Enrik Rushiti
+			Kiril Sikov
 
+Module:		Hero
+
+Purpose: 	Contains the main game loop.
+*/
 #include "hero.h"
 const UINT8 buffer2[BUFFER_256];
 const UINT8 staticBuffer[BUFFER_SIZE]; 

@@ -1,3 +1,11 @@
+/*
+Names:  	Enrik Rushiti
+			Kiril Sikov
+
+Module:		Const
+
+Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
+*/
 #include "raster.h"
 
 /* taken from lab 4*/

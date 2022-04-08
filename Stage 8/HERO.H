@@ -1,4 +1,11 @@
+/*
+Names:  	Enrik Rushiti
+			Kiril Sikov
 
+Module:		Hero
+
+Purpose: 	Contains the main game loop.
+*/
 
 #ifndef HERO_H
 #define HERO_H

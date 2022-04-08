@@ -1,6 +1,10 @@
 /*
-This is a library containing functions used to plot bitmaps.
-These will serve a purpose in later stages, remember how they work.
+Names:  	Enrik Rushiti
+			Kiril Sikov
+
+Module:		Const
+
+Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 */
 
 #ifndef RASTER_H

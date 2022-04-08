@@ -8,10 +8,7 @@
 
 SCREEN	equ 	$FFFF8201
 OFFSET 	equ 	8
-
-; 
-; 
-; 
+ 
 _getVideoBase:
 	move.l	a0,-(sp) 	
 	clr.l	d0		

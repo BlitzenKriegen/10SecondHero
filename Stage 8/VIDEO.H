@@ -1,7 +1,8 @@
 /*
 Authors: Enrik R and Kiril S
 
-This is the .H file for the .s files used for Physbase() and Setscreen()
+This is the .H file for video.s and super.s, which are system calls
+that replace Physbase() and Setscreen()
  */
 #ifndef VIDEO_H
 #define VIDEO_H

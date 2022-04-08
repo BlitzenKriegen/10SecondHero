@@ -1,0 +1,31 @@
+GCC = cc68x
+
+OBJ = hero.o renderer.o model.o event.o const.o raster.o video.o super.o
+
+tst_exc: $(OBJ)
+	$(GCC) -g $(OBJ) -o comp
+
+hero.o: hero.c hero.h const.h video.h
+	$(GCC) -g -c hero.c
+
+renderer.o: renderer.c renderer.h raster.h const.h
+	$(GCC) -g -c renderer.c
+
+event.o: event.c event.h
+	$(GCC) -g -c event.c
+	
+model.o: model.c model.h const.h
+	$(GCC) -g -c model.c
+
+const.o: const.c const.h
+	$(GCC) -g -c const.c
+
+raster.o: raster.c raster.h
+	$(GCC) -g -c raster.c
+	
+super.o: super.s
+	gen -D -L2 super.s
+
+video.o: video.s video.h
+	gen -D -L2 video.s
+

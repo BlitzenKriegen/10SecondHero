@@ -1,1 +1,14 @@
-yeah this be stage 8 need to implement stuff from stage 7 into this once stage 7 is done
+This the last stage we made it to.
+
+GAME GUIDE:
+
+When at splash screen:
+- press 1 to start single player game
+- press ESC to quit the game
+
+
+When in game:
+- use A and D to move left/right
+- use SPACE to jump
+- first jump THEN move left/right to move mid air.
+- catch the crystal before 10 seconds run out.

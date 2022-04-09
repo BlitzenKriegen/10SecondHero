@@ -1,5 +1,6 @@
 /*
-Authors: Enrik R and Kiril S
+Authors: 	Enrik R
+			Kiril S
 
 This is the .H file for video.s and super.s, which are system calls
 that replace Physbase() and Setscreen()
@@ -10,14 +11,15 @@ that replace Physbase() and Setscreen()
 #include "const.h"
 
 /*
-Same as Physbase(), returns the screen/video base
+Purpose: Same as Physbase(), returns the screen/video base
 
 */
 UINT16 *getVideoBase();
 
 /*
-Same as Setscreen(), sets screen base to given address.
- 
+Input: the start address of the frame buffer.
+
+Purpose: Same as Setscreen(), sets screen base to given address. 
 */
 void setVideoBase(UINT16 *base);
 

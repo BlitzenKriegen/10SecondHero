@@ -1,21 +1,19 @@
 /*
 Names:  	Enrik R
 			Kiril S
-Module:		Renderer
+
+Module:		Renderer 
+
 Purpose: 	The renderer module contains the subroutine and function calls related to the 
 			output of current gamestate to the screen. 
-Details: 	A model structure is created and initialized to set values from const.h,
-			const.c and model.c. The model then gets printed onto the screen via 16x16
-			bitmaps.
 */
 #include "model.h"
 #include "const.h"
 #include "raster.h"
+#include "splash.h"
 #include <osbind.h>
 
 /*
-Function: renderPlayer
-
 Input: 		Player: pointer to the player structure controlled by the user.
 			base: Pointer to the start of the frame buffer address.
 			
@@ -28,8 +26,6 @@ screen at the coordinates within the player structure.
 void renderPlayer(const struct Player *Player,UINT16 *base);
 
 /*
-Function: renderCrystal
-
 Input:		Player: pointer to the crystal structure within the game.
 			base: Pointer to the start of the frame buffer address.
 
@@ -42,8 +38,6 @@ screen at the coordinates within the crystal structure.
 void renderCrystal(const struct Crystal *crystal,UINT16 *base);
 
 /*
-Function: renderScore
-
 Input: 		score: the score structure in the gamestate.
 			base: pointer to the start of the frame buffer address.
 
@@ -57,8 +51,6 @@ able to score.
 void renderScore(const struct Score *score,UINT16 *base);
 
 /*
-Function: renderTimer
-
 Input: 		timeLeft: the timer structure in the gamestate.
 			base: pointer to the start of the frame buffer address.
 
@@ -72,7 +64,6 @@ is synced to the clock.
 void renderTimer(const struct TimeRemaining *timeLeft, UINT16 *base);
 
 /*
-Function: renderPlatform
 Input: 		platform: array of platforms in the game.
 			base: pointer to the start of the frame buffer address.
 
@@ -85,31 +76,57 @@ and puts them onto the screen using the drawHorizontal function.
 void renderPlatform(const struct Platform platform[],UINT16 *base);
 
 /*
-Function: render
-
 Input: 		model: the gamestate and all structures accociated with it.
 			base: pointer to the start of the frame buffer address.
 	
-Purpose: Initialises the gamestate to the starting position.
-
-Details: The function clears the screen before initializing the gamestate to
-a starting position. When this has finished, the function then goes on to
-output the gamestate to the user, with every substructure within model being
-"rendered".
+Purpose: Initialises the gamestate's static structures, which includes
+the platforms and text for scoreboard and timer.
 */
 void renderStatic(const struct Model *model, UINT16 *base);
 
+/*
+Input: 	model: the gamestate and all structures accociated with it.
+		base: pointer to the start of the frame buffer address.
+	
+Purpose: renders the "moveable" parts of the game, aka the player,
+crystal, score, and time remaining.
+*/
 void renderMovable(const struct Model *model, UINT16 *base);
 
-/*void wipeMovables(const struct Player *Player,const struct Crystal *crystal,
-				  UINT16 *base);*/
-
+/*
+Input: 	score: the current score the player has obtained.
+		base: pointer to the start of the frame buffer address.
+	
+Purpose: rerenders the score amount 
+*/
 void rerenderScore(struct Score *score, UINT16 *base);
 
-void renderNewScore(int ones,unsigned int x,unsigned int y, UINT16 *base);
+/*
+Input: 	digit: the digit of the score
+		base: pointer to the start of the frame buffer address.
+		x: x position of the passed in digit
+		y: y position of the passed in digit
+	
+Purpose: renders the updated bitmaps of the current score.
+*/
+void renderNewScore(int digit,unsigned int x,unsigned int y, UINT16 *base);
+
 
 void rerenderTimer(struct TimeRemaining *timeLeft, UINT16 *base);
 
+/*
+Input: 	digit: the digit of the timer
+		base: pointer to the start of the frame buffer address.
+		x: x position of the passed in digit
+		y: y position of the passed in digit
+	
+Purpose: renders the updated bitmaps of the current time.
+*/
 void renderNewTimer(int digit, unsigned int x, unsigned int y, UINT16 *base);
 
+/*
+Input:	base: pointer to the start of the frame buffer address.
+
+Purpose: renders the splash screen.
+*/
 void renderSplashScreen(UINT32* base);

@@ -11,6 +11,7 @@ Purpose: 	Contains the array for the splash screen's bitmap.
 
 #include <osbind.h>
 #include <stdio.h>
+#include "const.h"
 
 extern UINT32 SPLASH_SCREEN[];
 

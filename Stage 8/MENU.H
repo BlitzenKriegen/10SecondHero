@@ -14,6 +14,11 @@ Purpose: 	Contains the function(s) related to the splash screen and main menu
 #include "const.h"
 
 
+/* 
+Purpose: a menu that is looped while the player is at the splash screen.
+Pressing 1 makes the single player game start. Pressing ESC quits the game.
+*/
+bool splashScreenMenu ();
 
 
 

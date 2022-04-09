@@ -1,12 +1,11 @@
 /*
 Names:  	Enrik R
 			Kiril S
+
 Module:		Renderer 
+
 Purpose: 	The renderer module contains the subroutine and function calls related to the 
 			output of current gamestate to the screen. 
-Details: 	A model structure is created and initialized to set values from const.h,
-			const.c and model.c. The model then gets printed onto the screen via 16x16
-			bitmaps.
 */
 #include "renderer.h"
 
@@ -159,7 +158,7 @@ void renderNewScore(int digit, unsigned int x, unsigned int y, UINT16 *base)
 }
 
 void renderSplashScreen(UINT32* base) {
- /* clear_qk(base);*/
+    clearScreen();
 	plotScreen(base, SPLASH_SCREEN);
 }
 

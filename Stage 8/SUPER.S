@@ -1,5 +1,5 @@
 ; Authors: Enrik R and Kiril S
-; this is the super system call stuff
+; this is the super system call stuff for video.s to use
 
 	xdef	superOn
 	xdef	superOff

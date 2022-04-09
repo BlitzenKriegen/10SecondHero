@@ -2,9 +2,9 @@
 Names:  	Enrik Rushiti
 			Kiril Sikov
 
-Module:		Const
+Module:		Raster
 
-Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
+Purpose: 	Contains functions used to plot bitmaps and other stuff to the screen.
 */
 #include "raster.h"
 

@@ -2,9 +2,9 @@
 Names:  	Enrik Rushiti
 			Kiril Sikov
 
-Module:		Const
+Module:		Raster
 
-Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
+Purpose: 	Contains functions used to plot bitmaps and other stuff to the screen.
 */
 
 #ifndef RASTER_H
@@ -15,8 +15,6 @@ Purpose: 	Contains consts, typedefs, and bitmap data to be used by other modules
 #include "const.h"
 
 /* 
-Function: 	plotBitmap16
-
 Input:	  	base: pointer to the start of the frame buffer address.
 			x: x coordinate of the bitmap to be plotted
 			y: y coordinate of the bitmap to be plotted
@@ -34,8 +32,6 @@ void plotBitmap16(UINT16 *base,
 		    unsigned int height);
 
 /* 
-Function: 	drawHorizontal 
-
 Input:	  	base: pointer to the start of the frame buffer address.
 			x: x coordinate of the bitmap to be plotted
 			y: y coordinate of the bitmap to be plotted
@@ -56,8 +52,6 @@ void drawHorizontal(UINT16 *base,
 			  int length);
 
 /* 
-Function: 	drawVertical
-
 Input:	  	base: pointer to the start of the frame buffer address.
 			x: x coordinate of the bitmap to be plotted
 			y: y coordinate of the bitmap to be plotted
@@ -79,8 +73,6 @@ void drawVertical(UINT16 *base,
 			  int length);
 			  
 /* 
-Function: 	drawPixel 
-
 Input:	  	base: pointer to the start of the frame buffer address.
 			x: x coordinate of the pixel to be plotted
 			y: y coordinate of the pixel to be plotted
@@ -94,16 +86,24 @@ void drawPixel(UINT8 *base, int x,
 			   int y);
 
 /* 
-Function: 	clearScreen
-
 Purpose:	Clears the screen of all pixels.
 
 Details:	Turns off all pixels in the frame buffer, making the whole screen white.
 */	
 void clearScreen();
 
+/*
+Purpose: plots a bitmap to the entire screen. Used to render splash screen.
+
+*/
 void plotScreen(UINT32* base, UINT32* bitmap);
 
+/*
+Purpose: to plot a 16x16 bitmap to the screen.
+
+Details: very similar to plotBitmap16, but slightly faster. Only plots every 16 pixels though, so not used for player or crystal.
+
+*/
 void plotBitmapAlt(UINT16 *base,
 		    unsigned int x, unsigned int y,
 		    const UINT16 *bitmap,

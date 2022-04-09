@@ -12,9 +12,14 @@ const UINT8 staticBuffer[BUFFER_SIZE];
 
 int main()
 {
-	renderSplashscreen();
-	splashScreenMenu();
-	gameLoop();	
+	UINT16 *base = getVideoBase();
+	bool exitGame = false;
+	renderSplashScreen((UINT32*) base);
+	exitGame = splashScreenMenu();
+	if (exitGame == false)
+	{
+		gameLoop();		
+	}
 	return 0;
 }
 
@@ -26,7 +31,9 @@ void gameLoop()
 	UINT16 offset;
 	UINT16 align;
 	UINT16 *ptr = staticBuffPtr;
+	bool muted = false;
 	bool gameIsRunning = true;
+	UINT32 lastNotePlayed = 0;
 	ULONG32 timeNow, timeThen, timeElapsed, timerTime, currTimerTicks;
 	struct Model tenSecondHero;
 	unsigned long currInput = 0;
@@ -42,7 +49,8 @@ void gameLoop()
 	currTimerTicks = timeThen;
 	
 	renderStatic(&tenSecondHero,staticBuffPtr);
-
+	
+	startMusic();
 	while(gameIsRunning && tenSecondHero.score.scoreAmnt <= MAX_SCORE){
 		/* Async events*/
 		if (Cconis())
@@ -69,6 +77,13 @@ void gameLoop()
 				
 			processSyncEvents(&tenSecondHero, &currTimerTicks,
 				&timerTime, &gameIsRunning);
+			
+			if (timerTime - lastNotePlayed >= MUSIC_CLOCK_TICK){
+				updateMusic(timerTime);
+				lastNotePlayed = timerTime;
+			}
+			
+			
 			if (swapBuff)
 			{
 				memcpy(base1, staticBuffPtr, BUFFER_SIZE);
@@ -87,6 +102,7 @@ void gameLoop()
 			swapBuff = !swapBuff;
 		}
 	}
+	stopSound();
 	setVideoBase(base1);
 }
 

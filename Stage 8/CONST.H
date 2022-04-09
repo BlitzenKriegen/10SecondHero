@@ -122,6 +122,9 @@ RASTER MODULE & GENERAL STUFF
 #define D_KEY 0x00200064
 #define SPACE_ASCII 32
 #define SPACE_KEY 0x00390020
+#define ONE_KEY 0x00020031
+#define M_ASCII 109
+#define M_KEY 0x0032006D
 
 /*
 -----------------------------
@@ -149,6 +152,7 @@ RASTER MODULE & GENERAL STUFF
 #define BUFFER_SIZE 32000
 #define BUFFER_256 32256
 #define SECOND_TICK 70
+#define MUSIC_CLOCK_TICK 20
 
 /*
 -----------------------------

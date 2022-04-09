@@ -124,53 +124,190 @@ struct Model
 };
 
 
+/*
+Input:	model: the gamestate and all structures accociated with it.
 
+Purpose: give player vertical velocity so that he jumps once gravity kicks in.
+*/
 void playerJump (struct Model *model);	
 
+/*
+Input:	model: the gamestate and all structures accociated with it.
+
+Purpose: acts as gravity in order to make the player fall when he jumps
+or walks off a platform.
+*/
 void playerFall (struct Model *model);	
 
+/*
+Input:	model: the gamestate and all structures accociated with it.
+
+Purpose: makes the player run (or glide if airborne) left or right,
+based on player input.
+*/
+
+/*
+Input:	model: the gamestate and all structures accociated with it.
+
+Purpose: makes the player run (or glide if airborne) left or right,
+based on player input.
+*/
 void playerRun(struct Model *model);
 
+/*
+Input:	model: the gamestate and all structures accociated with it.
+		hitbox: the hitbox of a struct where collision affects the model
+
+Purpose: checks if a collision will occur based on the given hitbox's location.
+*/
 int possibleCollisionsCheck(struct Model model, struct Hitbox hitbox);
 
+/*
+Input:	currNum: the current/previous random number used
+
+Purpose: generate a random number, and regenerates a new
+number if the result is same as currNum
+*/
 int calcRand(int currNum);
 
+/*
+Input:	crystal: struct of the ingame crystal
+
+Purpose: randomly teleports the crystal to one of 7 different locations. 
+*/
 void crystalRandomSpawn(struct Crystal *crystal);
 
+/*
+Input:	score: the struct of the ingame score.
+
+Purpose: increments the score amount.
+*/
 void increaseScore(struct Score *score);
 
+/*
+Input:	timeLeft: struct of the remaining time in the game.
+
+Purpose: decrements the timer's seconds.
+*/
 void decreaseTime(struct TimeRemaining *timeLeft);
 
+/*
+Input:	timeLeft: struct of the remaining time in the game.
+
+Purpose: increments the timer by 3 seconds, with the max
+amount of seconds the timer can reach being 10 seconds.
+*/
 void increaseTime(struct TimeRemaining *timeLeft);
 
+/*
+Input:	box1: hitbox of the first object
+		box2: hitbox of the second object
+
+Purpose: checks if a collision happened between two objects.
+*/
 bool collision(struct Hitbox box1, struct Hitbox box2);
 
+/*
+Input:	box1: hitbox of the first object
+		box2: hitbox of the second object
+
+Purpose: checks if object 1 collided with the right side
+of object 2 (a platform).
+*/
 bool collideRightOfPlatform(struct Hitbox box1, struct Hitbox box2);
 
+/*
+Input:	box1: hitbox of the first object
+		box2: hitbox of the second object
+
+Purpose: checks if object 1 collided with the left side
+of object 2 (a platform).
+*/
 bool collideLeftOfPlatform(struct Hitbox box1, struct Hitbox box2);
 
+/*
+Input:	box1: hitbox of the first object
+		box2: hitbox of the second object
+
+Purpose: checks if object 1 collided with the bottom
+of object 2 (a platform).
+*/
 bool collideBottomOfPlatform(struct Hitbox box1, struct Hitbox box2);
 
+/*
+Input:	box1: hitbox of the first object
+		box2: hitbox of the second object
+
+Purpose: checks if object 1 collided with the top
+of object 2 (a platform).
+*/
 bool collideTopOfPlatform(struct Hitbox box1, struct Hitbox box2);
 
+/*
+Input:	model: the gamestate and all structures accociated with it.
+
+Purpose: checks if the player has collided with a platform. If so,
+returns which platform he collided with.
+*/
 int platformCollisionsCheck(struct Model model);
 
+/*
+Input:	model: the gamestate and all structures accociated with it.
+
+Purpose: checks if the player is "airborne", aka not colliding with the
+top/surface of a platform.
+*/
 bool airborneCheck (struct Model model);
+
 
 /* initiliziers*/
 
 
+/*
+Input:	platform: the struct of the in game platforms
+		x: x pos of the platform
+		y: y pos of the platform
+		length: length of the platform
+
+Purpose: initializes the platforms' data.
+*/
 void initPlatform(struct Platform *platform, unsigned int x,
 	unsigned int y, unsigned int length);	
 
+/*
+Input:	playChar: struct of the ingame player.
+
+Purpose: initializes the player's data.
+*/
 void initPlayer(struct Player *playChar);		
 
+/*
+Input:	crystal: struct of the ingame crystal.
+
+Purpose: initializes the crystal's data.
+*/
 void initCrystal(struct Crystal *crystal);	
 
+/*
+Input:	score: struct of the ingame score.
+
+Purpose: initializes the score's data.
+*/
 void initScore(struct Score *score);	
 
+/*
+Input:	timeLeft: struct of the ingame timer.
+
+Purpose: initializes the timer's data.
+*/
 void initTimer(struct TimeRemaining *timeLeft);	
 
+/*
+Input:	model: the gamestate and all structures accociated with it.
+
+Purpose: initializes the model's data.
+*/
 void initModel(struct Model *model);	
+
 
 #endif

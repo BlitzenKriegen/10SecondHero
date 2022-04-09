@@ -21,9 +21,7 @@ Details: 	Event handlers affect the game based on synchronous, asynchronous, or
 /* Synchronous Events */
 
 /*
-Function: makePlayerFall
-
-Input: 		model: pointer to the model containing the ingame structures.
+Input: 	model: pointer to the model containing the ingame structures.
 			
 Purpose: make the player fall.
 
@@ -34,9 +32,7 @@ in order to make him fall back down to the ground/a platform.
 void makePlayerFall(struct Model *model);
 
 /*
-Function: tickTimeDown
-
-Input: 		model: pointer to the model containing the ingame structures.
+Input: 	model: pointer to the model containing the ingame structures.
 			
 Purpose: make the ingame time tick down by a second.
 
@@ -49,15 +45,14 @@ void tickTimeDown(struct Model *model);
 /* Asynchronous Events*/
 
 /*
-Function: movePlayer
-
-Input: 		model: pointer to the model containing the ingame structures.
+Input: 	model: pointer to the model containing the ingame structures.
 			
-Purpose: make the player move based on user's key presses.
+Purpose: changes the player's direction/velocity based on key pressed.
 
-Details: depending on what keys the user pressed, the player will run left
-or right if A or D are pressed, respectively, and the player will jump if
-the user presses the space bar.
+Details: depending on what keys the user pressed, the player will have
+his horizontal velocity changed. If A or D are pressed, his velocity gets
+changed to towards the left or right respectively. If space is pressed,
+he gains vertical velocity, will lead to him jumping. 
 */
 void movePlayer (struct Model *model, unsigned long key);
 
@@ -65,8 +60,6 @@ void movePlayer (struct Model *model, unsigned long key);
 /* Conditional Events*/
 
 /*
-Function: isTimer0
-
 Input: 		model: value of the model containing the ingame structures.
 			
 Purpose: returns if the in game timer is 0 seconds (or lower)
@@ -77,9 +70,7 @@ the in game timer has reached 0, which is the end condition for the game.
 bool isTimer0 (struct Model model);
 
 /*
-Function: crystalCollected
-
-Input: 		model: pointer to the model containing the ingame structures.
+Input: 	model: pointer to the model containing the ingame structures.
 			
 Purpose: handles the collection of a crystal in the game
 

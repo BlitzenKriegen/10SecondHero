@@ -1,4 +1,11 @@
-This the last stage we made it to.
+IMPORTANT NOTE: The game by itself exceeds the 
+memory limit of the default settings within 
+Steem. Make sure that the memory size within
+Steem is greater than 1MB (choose 4MB in options > machine).
+You will need to cold reset the Steem emulator
+in order for memory changes to take effect. This
+option can be found at the bottom of the machine
+settings.
 
 GAME GUIDE:
 

@@ -29,6 +29,8 @@ int calcRand(int oldNum){
 void crystalRandomSpawn(struct Crystal *crystal)
 {
 	int randomNum = calcRand(crystal->currPlace);
+	crystal->oldX = crystal->x;
+	crystal->oldY = crystal->y;
 	crystal->currPlace = randomNum;
 	
 	switch(randomNum)
@@ -97,6 +99,9 @@ void crystalRandomSpawn(struct Crystal *crystal)
 void playerFall (struct Model *model)
 {
 	int platformNum = -1;
+		
+	model->player.oldX = model->player.x;
+	model->player.oldY = model->player.y;
 
 	model->player.y += model->player.yVelocity;
 	model->player.hitbox.topLeftY += model->player.yVelocity;
@@ -155,6 +160,9 @@ void playerRun(struct Model *model)
 	possibleCollision.topLeftY = model->player.hitbox.topLeftY;
 	possibleCollision.bottomRightY = model->player.hitbox.bottomRightY +
 		model->player.xVelocity;
+	
+	model->player.oldX = model->player.x;
+	model->player.oldY = model->player.y;
 	
 	
 	if (IN_BOUNDS(model->player.x + model->player.xVelocity, model->player.y))
@@ -301,6 +309,8 @@ void initPlayer(struct Player *playChar)
 {
 	playChar->x = PLAYER_X;
 	playChar->y = PLAYER_Y;
+	playChar->oldX = PLAYER_X;
+	playChar->oldX = PLAYER_Y;
 	playChar->xVelocity = PLAYER_X_VEL;
 	playChar->yVelocity = PLAYER_Y_VEL;
 	playChar->hitbox.topLeftX = playChar->x;
@@ -314,6 +324,8 @@ void initCrystal(struct Crystal *crystal)
 	crystal->currPlace = 0;
 	crystal->x = CRYSTAL_X;
 	crystal->y = CRYSTAL_Y;
+	crystal->oldX = CRYSTAL_X;
+	crystal->oldY = CRYSTAL_Y;
 	crystal->hitbox.topLeftX = crystal->x;
 	crystal->hitbox.topLeftY = crystal->y;
 	crystal->hitbox.bottomRightX = crystal->x + SPRITE_SIZE;
